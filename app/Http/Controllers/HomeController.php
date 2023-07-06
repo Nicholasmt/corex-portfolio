@@ -13,9 +13,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //
+        return view('front.home');
     }
-
+    public function about()
+    {
+        return view('front.about');
+    }
     /**
      * Show the form for creating a new resource.
      *

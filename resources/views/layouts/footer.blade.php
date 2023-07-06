@@ -1,3 +1,3 @@
 <div class="credits">
-    © Copyright {{date('Y')}} <a href="#">Nicholas Tochukwu</a>
+    Nicholas Tochukwu  <a href="#"> © Copyright {{date('Y')}}</a>
 </div>
