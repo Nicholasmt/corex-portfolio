@@ -19,6 +19,23 @@ class HomeController extends Controller
     {
         return view('front.about');
     }
+    public function resume()
+    {
+        return view('front.resume');
+    }
+    public function services()
+    {
+        return view('front.services');
+    }
+
+    public function portfolio()
+    {
+        return view('front.portfolio');
+    }
+    public function contact()
+    {
+        return view('front.contact');
+    }
     /**
      * Show the form for creating a new resource.
      *

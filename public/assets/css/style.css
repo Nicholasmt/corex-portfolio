@@ -25,7 +25,7 @@ body::before {
 }
 
 a {
-  color: #18d26e;
+  color: #d21818;
   text-decoration: none;
 }
 
@@ -505,6 +505,7 @@ section .container {
   height: 10px;
   transition: 0.9s;
   background-color: #0192fc;
+  color: #d21818;
 }
 
 /*--------------------------------------------------------------
@@ -615,7 +616,7 @@ section .container {
 }
 
 .testimonials .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #18d26e;
+  background-color: #d21818;
 }
 
 /*--------------------------------------------------------------
@@ -642,7 +643,7 @@ section .container {
   font-weight: 600;
   text-transform: uppercase;
   font-family: "Poppins", sans-serif;
-  color: #18d26e;
+  color: #d21818;
   margin-bottom: 10px;
 }
 
@@ -675,8 +676,8 @@ section .container {
   border-radius: 50px;
   left: -9px;
   top: 0;
-  background: #18d26e;
-  border: 2px solid #18d26e;
+  background: #d21818;
+  border: 2px solid #d21818;
 }
 
 /*--------------------------------------------------------------
@@ -693,7 +694,7 @@ section .container {
   margin: 0 auto;
   width: 64px;
   height: 64px;
-  background: #18d26e;
+  background: #d21818;
   border-radius: 5px;
   transition: all 0.3s ease-out 0s;
   display: flex;
@@ -738,8 +739,8 @@ section .container {
 }
 
 .services .icon-box:hover {
-  background: #18d26e;
-  border-color: #18d26e;
+  background: #d21818;
+  border-color: #d21818;
 }
 
 .services .icon-box:hover .icon {
@@ -747,7 +748,7 @@ section .container {
 }
 
 .services .icon-box:hover .icon i {
-  color: #18d26e;
+  color: #d21818;
 }
 
 .services .icon-box:hover .icon::before {
@@ -792,7 +793,7 @@ section .container {
 
 .portfolio #portfolio-flters li:hover,
 .portfolio #portfolio-flters li.filter-active {
-  background: #18d26e;
+  background: #d21818;
 }
 
 .portfolio #portfolio-flters li:last-child {
@@ -986,7 +987,7 @@ section .container {
 }
 
 .portfolio-details .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #18d26e;
+  background-color: #d21818;
 }
 
 /*--------------------------------------------------------------
@@ -1001,7 +1002,7 @@ section .container {
 
 .contact .info-box i.bx {
   font-size: 24px;
-  color: #18d26e;
+  color: #d21818;
   border-radius: 50%;
   padding: 14px;
   float: left;
@@ -1038,7 +1039,7 @@ section .container {
 }
 
 .contact .info-box .social-links a:hover {
-  color: #18d26e;
+  color: #d21818;
 }
 
 .contact .php-email-form {
@@ -1062,7 +1063,7 @@ section .container {
 .contact .php-email-form .sent-message {
   display: none;
   background: rgba(255, 255, 255, 0.08);
-  background: #18d26e;
+  background: #d21818;
   text-align: center;
   padding: 15px;
   font-weight: 600;
@@ -1082,7 +1083,7 @@ section .container {
   width: 24px;
   height: 24px;
   margin: 0 10px -6px 0;
-  border: 3px solid #18d26e;
+  border: 3px solid #d21818;
   border-top-color: #eee;
   animation: animate-loading 1s linear infinite;
 }
@@ -1124,7 +1125,7 @@ section .container {
 }
 
 .contact .php-email-form button[type=submit] {
-  background: #18d26e;
+  background: #d21818;
   border: 0;
   padding: 10px 30px;
   color: #fff;
