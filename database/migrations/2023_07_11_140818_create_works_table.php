@@ -15,16 +15,16 @@ return new class extends Migration
     {
         Schema::create('works', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('cat_id')->unsigned();
+            $table->bigInteger('service_id')->unsigned();
             $table->string('photo');
             $table->string('descriptions');
             $table->string('urls');
             $table->string('clients')->nullable();
             $table->timestamps();
 
-            $table->foreign('cat_id')
+            $table->foreign('service_id')
                   ->references('id')
-                  ->on('categories')
+                  ->on('services')
                   ->onDelete('cascade');
         });
     }
