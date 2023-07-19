@@ -26,6 +26,12 @@ class AuthController extends Controller
         
     }
 
+    public function logout(Request $request)
+    {
+        $request->session()->invalidate();
+        return redirect('login');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

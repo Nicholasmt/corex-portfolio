@@ -25,11 +25,11 @@ class Auth extends Component
         return view('livewire.auth');
     }
 
-    public function auth()
-    {
-        $this->valodate();
+        public function auth()
+        {
+            $this->validate();
 
-            $user = Users::where('email',$this->email)->with('role')->first();
+            $user = User::where('email',$this->email)->first();
             if($user)
             {
                 if(\Hash::check($this->password,$user->password))
@@ -37,24 +37,30 @@ class Auth extends Component
                     session()->put('id',$user->id);
                     session()->put('email',$user->email);
                     session()->put('name',$user->name);
-                    // session()->put('photo',$users_info->profile_photo);
+                    session()->put('privilege',$user->role_id);
                     session()->put('authentication',true);
 
                     return redirect('redirect');
+
+                    // session()->flash('success','Success');
+                    
 
                  }
 
                 else
                 {
-                    return back()->with('error','Email and Password Mismatch');
+                    session()->flash('error','Email and Password Mismatch!');
                 }
                     
             }
             else
             {
-                return back()->with('error','Account does not Exist!');
+                session()->flash('error','User does not exist!');
             }
+
+            $this->emit('alert_remove');
         }
+
     
 
 }

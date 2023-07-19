@@ -42,10 +42,7 @@ class HomeController extends Controller
         return view('front.auth.login');
     }
 
-    public function dashboard()
-    {
-        return view('back.dashboard');
-    }
+    
     /**
      * Show the form for creating a new resource.
      *
