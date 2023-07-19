@@ -32,10 +32,10 @@
                              </div>
                             <thead>
                               <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">No</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Descriptions</th>
+                                <th scope="col">Actions</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -45,17 +45,8 @@
                                 <td>Otto</td>
                                 <td>@mdo</td>
                               </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                              </tr>
+                               
+                
                             </tbody>
                           </table>
                     </div>
@@ -71,10 +62,12 @@
                              </div>
                             <thead>
                               <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">No</th>
+                                <th scope="col">Catgory</th>
+                                <th scope="col">Photos</th>
+                                <th scope="col">Descriptions</th>
+                                <th scope="col">Urls</th>
+                                <th scope="col">Clients</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -84,17 +77,8 @@
                                 <td>Otto</td>
                                 <td>@mdo</td>
                               </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                              </tr>
+                           
+                              
                             </tbody>
                           </table>
                     </div>
