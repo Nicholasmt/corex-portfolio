@@ -5,6 +5,14 @@ body {
   position: relative;
   background: transparent;
 }
+.modal{
+  margin-top: 8%;
+}
+.modal-backdrop{
+ z-index: -1 !important;
+ background: #444444 !important;
+ 
+}
 
 body::before {
   content: "";

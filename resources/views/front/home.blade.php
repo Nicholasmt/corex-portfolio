@@ -18,6 +18,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
+      
       <div class="social-links">
         <a href="https://twiter.com/corex_designs" class="twitter"><i class="bi bi-twitter"></i></a>
         <a href="https://github.com/Nicholasmt" class="github"><i class="bi bi-github"></i></a>
