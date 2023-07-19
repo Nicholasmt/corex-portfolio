@@ -16,6 +16,16 @@ class AuthController extends Controller
         //
     }
 
+    public function redirect()
+    {
+        
+        if(session()->get('authentication') == true && session()->get('privilege') == 1)
+        {
+          return redirect('admin/dashboard');
+        }
+        
+    }
+
     /**
      * Show the form for creating a new resource.
      *

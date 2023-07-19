@@ -20,8 +20,11 @@ Route::get('services', [App\Http\Controllers\HomeController::class, 'services'])
 Route::get('portfolio', [App\Http\Controllers\HomeController::class, 'portfolio'])->name('portfolio');
 Route::get('contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
 Route::get('login', [App\Http\Controllers\HomeController::class, 'login'])->name('login');
+Route::get('redirect', [App\Http\Controllers\AuthController::class, 'redirect'])->name('redirect');
 
 
 Route::group(['prefix'=>'admin' ,'as'=>'admin','middleware'=>'admin'], function(){
+
   Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
+
 });
