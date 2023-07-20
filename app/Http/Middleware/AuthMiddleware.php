@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\Controller;
 
 class AuthMiddleware
 {
@@ -20,7 +21,7 @@ class AuthMiddleware
         {
             return $next($request);
         }
-        
+           Controller::where('id',1)->update(['section'=>1]);
           return redirect('login')->with('error','Session Expired');
     }
 }

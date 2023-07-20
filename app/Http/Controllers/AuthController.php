@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Controller as SideBar;
+ 
 class AuthController extends Controller
 {
     /**
@@ -28,6 +29,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        SideBar::where(['id'=>1])->update(['section'=>1]);
         $request->session()->invalidate();
         return redirect('login');
     }
