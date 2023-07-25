@@ -9,4 +9,9 @@ class Work extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
+    public function service()
+    {
+        $this->belongsTo('App\Models\Service','service_id');
+    }
 }

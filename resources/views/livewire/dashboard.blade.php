@@ -9,7 +9,7 @@
                 <button wire:click="dashboard" class="nav-link mt-2 @if(!Session::has('section') && $current == 1) active @elseif($current == 1) active @endif" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class=" bi bi-house-door"> </i> Dashboard</button>
                 <button wire:click="services" class="nav-link mt-2 @if($current == 2) active @endif" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"><i class=" bi bi-bookmark-check"> </i> Services</button>
                 <button wire:click="portfolio" class="nav-link mt-2 @if($current == 3) active @endif" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false"><i class="bi bi-card-image"></i> Portfolios</button>
-                <button wire:click="settings" class="nav-link mt-2 @if($current == 4) active @endif" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"> <i class="bi bi-gear-wide"></i> Settings</button>
+                <button wire:click="settings" class="nav-link mt-2 @if($current == 4) active @endif" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"> <i class="bi bi-person-fill-gear"></i> Settings</button>
                 <a href="{{ route('logout')}}" class="nav-link mt-2 ml-3"> <i class="bi bi-box-arrow-right"></i> Logout</a>
              </div>
            </div>
@@ -51,7 +51,7 @@
                                 <tr>
                                   <th scope="row">{{$counter++}}</th>
                                   <td>{{$service->title}}</td>
-                                  <td>{{$service->descriptions}}</td>
+                                  <td>{{$service->description}}</td>
                                   <td>
                                     <button wire:click="update_button({{$service->id}})" class="btn btn-light"><span class="bi bi-pencil-square"></span></button>
                                     <button wire:click="delete_services({{$service->id}})" class="btn btn-danger"><span class="bi bi-trash"></span></button>
@@ -78,6 +78,11 @@
                                 <input type="text" wire:model.defer="description" class="form-control">
                                 @error('description') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                             </div>
+                            <div class="form-group mt-2">
+                                <label for="icon" class="">Icon</label>
+                                <input type="text" wire:model.defer="icon" class="form-control">
+                                @error('icon') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                            </div>
                             <div class="mt-4">
                                 <button wire:click="add_service" class="btn btn-primary ml-4">Save</button>
                                 <button wire:click="remove_button" class="btn btn-secondary">Cancel</button>
@@ -99,6 +104,11 @@
                               <input type="text" wire:model.defer="description" class="form-control">
                               @error('description') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                           </div>
+                          <div class="form-group mt-2">
+                            <label for="icon" class="">Icon</label>
+                            <input type="text" wire:model.defer="icon" class="form-control">
+                            @error('icon') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                        </div>
                           <div class="mt-4">
                               <button wire:click="update_services({{$update_id}})" class="btn btn-primary ml-4">Update</button>
                               <button wire:click="remove_button" class="btn btn-secondary">Cancel</button>
@@ -130,15 +140,27 @@
                                     <th scope="col">Descriptions</th>
                                     <th scope="col">Urls</th>
                                     <th scope="col">Clients</th>
+                                    <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                  </tr>
+                                    @forelse ($portfolios as $portfolio)
+                                      <tr>
+                                        <th scope="row">{{$counter++}}</th>
+                                        <td>{{$portfolio->service->title}}</td>
+                                        <td>{{$portfolio->photo}}</td>
+                                        <td>{{$portfolio->description}}</td>
+                                        <td>{{$portfolio->url}}</td>
+                                        <td>{{$portfolio->client}}</td>
+                                        <td>
+                                            <button wire:click="update_button" class="btn btn-light"><span class="bi bi-pencil-square"></span></button>
+                                            <button wire:click="delete" class="btn btn-light"> <span class="bi bi-trash"></span></button>
+                                        </td>
+                                      </tr> 
+                                    @empty
+                                      <td><span class="mt-2">No Data Found</span></td>  
+                                    @endforelse
+                               
                                 </tbody>
                              </table>
                            </div>
@@ -148,22 +170,55 @@
                            <h4 class="text-center">Add New</h4>
                               <div class="container col-lg-10 col-sm-12 col-md-12 ml-5">
                                 <div class="form-group mt-3">
-                                    <label for="title" class="">Service </label>
-                                    <select wire:model.defer="" class="form-control">
+                                    <label for="service_id" class="">Service </label>
+                                    <select wire:model.defer="service_id" class="form-control">
                                         <option value="">Select Option</option>
                                       @foreach ($services as $service)
                                         <option value="{{$service->id}}">{{$service->title}}</option>
                                       @endforeach
                                     </select>
-                                    @error('title') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                                    @error('service_id') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                                 </div>
                                 <div class="form-group mt-2">
-                                    <label for="descriptions" class="">Descriptions</label>
-                                    <input type="text" wire:model.defer="description" class="form-control">
+                                    <label for="client" class="">Clients</label>
+                                    <input type="text" wire:model.defer="client" class="form-control">
+                                    @error('client') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label for="urls" class="">Url</label>
+                                    <input type="text" wire:model.defer="url" class="form-control">
+                                    @error('url') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label for="descriptions" class="">Description</label>
+                                    <textarea   wire:model.defer="description" class="form-control" rol="5"></textarea>
                                     @error('description') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                                 </div>
+ 
+                                <div class="form-group mt-2">
+                                    <label for="photo" class="">Photo</label>
+                                    <div x-data="{ isUploading: false, progress: 0}" 
+                                        x-on:livewire-upload-start="isUploading = true; progress: 5"
+                                        x-on:livewire-upload-finish="isUploading = false"
+                                        x-on:livewire-upload-error="isUploading = false"
+                                        x-on:livewire-upload-progress="progress = $event.detail.progress"
+                                        >
+                                        <input type="file" class="form-control-file" accept="image/png, image/gif, image/jpeg" wire:model="photos" multiple>
+                                        <div x-show="isUploading" class="mt-2">
+                                          <progress max="100" x-bind:value="progress"></progress><br>
+                                        </div>
+                                        
+                                    </div>
+                                     @error('photos.*') <span class="text-danger font-13 text-capitalize">{{$message}}</span> @enderror
+                                     @if ($photos)
+                                        Preview: <br>
+                                        @foreach ($photos as $photo)
+                                          <img src="{{ $photo->temporaryUrl() }}" class="image_fit" height="170" width="214">
+                                        @endforeach
+                                     @endif
+                                </div>
                                 <div class="mt-4">
-                                    <button wire:click="add_service" class="btn btn-primary ml-4">Save</button>
+                                    <button wire:click="add_portfolio" class="btn btn-primary ml-4">Save</button>
                                     <button wire:click="remove_button" class="btn btn-secondary">Cancel</button>
                                 </div>
                             </div>

@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('service_id')->unsigned();
             $table->string('photo');
-            $table->string('descriptions');
-            $table->string('urls');
-            $table->string('clients')->nullable();
+            $table->string('description');
+            $table->string('url');
+            $table->string('client')->nullable();
             $table->timestamps();
 
             $table->foreign('service_id')
