@@ -18,6 +18,7 @@ Route::get('about', [App\Http\Controllers\HomeController::class, 'about'])->name
 Route::get('resume', [App\Http\Controllers\HomeController::class, 'resume'])->name('resume');
 Route::get('services', [App\Http\Controllers\HomeController::class, 'services'])->name('services');
 Route::get('portfolio', [App\Http\Controllers\HomeController::class, 'portfolio'])->name('portfolio');
+Route::get('detail/{id}', [App\Http\Controllers\HomeController::class, 'detail'])->name('detail');
 Route::get('contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
 Route::get('login', [App\Http\Controllers\HomeController::class, 'login'])->name('login');
 Route::get('logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Service;
+use App\Models\Work;
 
 class HomeController extends Controller
 {
@@ -32,7 +33,13 @@ class HomeController extends Controller
 
     public function portfolio()
     {
-        return view('front.portfolio');
+        $works = Work::all();
+        $services = Service::all();
+        return view('front.portfolio',compact('works','services'));
+    }
+    public function detail($id)
+    {
+        return view('front.detail');
     }
     public function contact()
     {
