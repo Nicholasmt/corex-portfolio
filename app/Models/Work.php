@@ -12,6 +12,6 @@ class Work extends Model
 
     public function service()
     {
-        $this->belongsTo('App\Models\Service','service_id');
+      return $this->belongsTo('App\Models\Service','service_id');
     }
 }

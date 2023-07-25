@@ -125,6 +125,11 @@
                         <div class="card-body">
                         @if($button == 0 && $current == 3)
                            <h4 class="text-center">Manage Portfolios</h4>
+                           @if(Session::has('message'))
+                           <div class="alert alert-success">
+                             <span class="text-capitalize font-bold">{{session()->get('message')}}</span>
+                           </div>
+                           @endif
                            <div class="table-responsive container mt-3">
                              <table class="table table-dark table-hover">
                                 <div class="float-end mt-3">
@@ -148,13 +153,18 @@
                                       <tr>
                                         <th scope="row">{{$counter++}}</th>
                                         <td>{{$portfolio->service->title}}</td>
-                                        <td>{{$portfolio->photo}}</td>
+                                        <td>
+                                            @foreach (json_decode($portfolio->photo) as $photo)
+                                               {{-- {{$photo}} --}}
+                                               <img src="{{ asset($photo)}}" height="50" width="50" alt="">  
+                                            @endforeach
+                                        </td>
                                         <td>{{$portfolio->description}}</td>
                                         <td>{{$portfolio->url}}</td>
                                         <td>{{$portfolio->client}}</td>
                                         <td>
                                             <button wire:click="update_button" class="btn btn-light"><span class="bi bi-pencil-square"></span></button>
-                                            <button wire:click="delete" class="btn btn-light"> <span class="bi bi-trash"></span></button>
+                                            <button wire:click="delete_portfolio({{$portfolio->id}})" class="btn btn-danger"> <span class="bi bi-trash"></span></button>
                                         </td>
                                       </tr> 
                                     @empty

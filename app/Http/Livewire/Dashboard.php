@@ -192,6 +192,12 @@ class Dashboard extends Component
 
     }
 
+    public function delete_portfolio($id)
+    {
+        Work::where('id',$id)->delete(); 
+        session()->flash('message','Deleted successfully!');
+    }
+
     //   work query end
 
 
