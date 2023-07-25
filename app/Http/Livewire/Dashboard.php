@@ -4,17 +4,23 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Controller;
+use App\Models\Service;
+use App\Models\Work;
 
 class Dashboard extends Component
 { 
-    public $current;
+    public $current,$services,$portfolios,$counter;
+    public $title,$description,$button,$update_id;
 
     public function render()
     {
         $updated = Controller::where(['id'=>1])->first();
         $this->current = $updated->section;
-         
-         return view('livewire.dashboard');
+        $this->counter = 1;
+        $this->services = Service::all();
+        $this->portfolios = Work::all();
+        // $this->add_button;
+        return view('livewire.dashboard');
     }
 
     public function dashboard()
@@ -30,7 +36,7 @@ class Dashboard extends Component
             Controller::create(['section'=>1]);
         }
 
-        session()->flash('message','1');
+        session()->flash('section','1');
 
      }
     public function services()
@@ -46,7 +52,7 @@ class Dashboard extends Component
         }
 
         
-        session()->flash('message','2');
+        session()->flash('section','2');
 
        
     }
@@ -63,7 +69,7 @@ class Dashboard extends Component
         }
 
         
-        session()->flash('message','3');
+        session()->flash('section','3');
 
          
     }
@@ -80,6 +86,67 @@ class Dashboard extends Component
         }
 
         
-        session()->flash('message','4');
+        session()->flash('section','4');
     }
+
+    public function add_button()
+    {
+        $this->button = 1;
+    }
+
+    public function update_button($id)
+    {
+        // for services
+        $category = service::where(['id'=>$id])->first();
+        $this->title = $category->title;
+        $this->description = $category->descriptions;
+        $this->update_id = $id;
+        $this->button = 2;
+    }
+
+    public function remove_button()
+    {
+        $this->button = 0;
+        $this->reset();
+    }
+
+    // services query starts
+
+    public function add_service()
+    { 
+        
+        $validation = $this->validate(['title'=>'required',
+                                       'description'=>'required'
+                                      ]);
+
+        Service::create(['title'=>$this->title,
+                         'description'=>$this->description
+                        ]);
+
+        session()->flash('message','added successfully!');
+        $this->button = 0;
+        $this->reset();
+    }
+
+    public function delete_services($id)
+    {
+        service::where(['id'=>$id])->detete();
+        session()->flash('message','Deleted successfully!');
+        $this->emit('alert_remove');
+    }
+
+    public function update_services($id)
+    {
+        dd($id);
+         service::where(['id'=>$id])->update(['title'=>$this->title,
+                                              'description'=>$this->description
+                                            ]);
+        session()->flash('message','Updated successfully!');
+        $this->button = 0;
+        
+    }
+
+  // services query ends
+
+
 }

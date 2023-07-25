@@ -26,6 +26,6 @@ Route::get('redirect', [App\Http\Controllers\AuthController::class, 'redirect'])
 
 Route::group(['prefix'=>'admin' ,'as'=>'admin','middleware'=>'admin'], function(){
 
-  Route::get('dashboard', [App\Http\Controllers\PortfolioController::class, 'index'])->name('dashboard');
+  Route::get('dashboard', [App\Http\Controllers\PortfolioController::class, 'index'])->name('-dashboard');
 
 });

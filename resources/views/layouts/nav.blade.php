@@ -11,6 +11,9 @@
           <li><a class="nav-link" href="{{ route('services')}}">Services</a></li>
           <li><a class="nav-link" href="{{ route('portfolio')}}">Portfolio</a></li>
           <li><a class="nav-link" href="{{ route('contact')}}">Contact</a></li>
+          @if (Session::get('authentication') == true)
+          <li><a class="btn btn-primary" href="{{ route('admin-dashboard')}}">Dashboard</a></li>  
+          @endif
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
