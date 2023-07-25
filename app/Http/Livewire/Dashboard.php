@@ -175,7 +175,7 @@ class Dashboard extends Component
             $photo_array=[];
             foreach ($this->photos as $photo) 
             {
-              $portfolio_photo = $photo->storeAs('imgs/portfolio', substr(rand(0,time()),0,5).'.png');
+              $portfolio_photo = $photo->storeAs('portfolios', substr(rand(0,time()),0,5).'.png');
               $photo_array[]= 'storage/app/'.$portfolio_photo;
             }
             
@@ -187,6 +187,8 @@ class Dashboard extends Component
                        'client'=>$this->client,
                        'service_id'=>$this->service_id,
                       ]);
+
+        session()->flash('message','Added successfully!');
 
          $this->button = 0;
 

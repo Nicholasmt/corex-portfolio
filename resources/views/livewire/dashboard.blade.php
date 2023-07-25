@@ -154,12 +154,15 @@
                                         <th scope="row">{{$counter++}}</th>
                                         <td>{{$portfolio->service->title}}</td>
                                         <td>
-                                            @foreach (json_decode($portfolio->photo) as $photo)
-                                               {{-- {{$photo}} --}}
-                                               <img src="{{ asset($photo)}}" height="50" width="50" alt="">  
-                                            @endforeach
+                                             <div class="row">
+                                                @foreach (json_decode($portfolio->photo) as $photo)
+                                                <div class="">
+                                                   <img src="{{ asset($photo)}}" height="50" width="50" alt="">  
+                                                </div>
+                                                @endforeach
+                                             </div>
                                         </td>
-                                        <td>{{$portfolio->description}}</td>
+                                        <td>{{substr($portfolio->description, 0,20)}}...</td>
                                         <td>{{$portfolio->url}}</td>
                                         <td>{{$portfolio->client}}</td>
                                         <td>
