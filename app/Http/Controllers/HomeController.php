@@ -39,7 +39,8 @@ class HomeController extends Controller
     }
     public function detail($id)
     {
-        return view('front.detail');
+        $detail = Work::where(['id'=>$id])->first();
+        return view('front.detail',compact('detail'));
     }
     public function contact()
     {

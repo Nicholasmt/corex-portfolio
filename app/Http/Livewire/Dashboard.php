@@ -102,14 +102,26 @@ class Dashboard extends Component
 
     public function update_button($id)
     {
-        // for services
-        $category = service::where(['id'=>$id])->first();
-        $this->title = $category->title;
-        $this->description = $category->description;
-        $this->icon = $category->icon;
+        if($this->current ==2)
+        {
+            // for services
+            $category = service::where(['id'=>$id])->first();
+            $this->title = $category->title;
+            $this->description = $category->description;
+            $this->icon = $category->icon;
+        }
 
-
-    
+        if($this->current ==3)
+        {
+            // for portfolio
+            $works = Work::where(['id'=>$id])->first();
+            $this->service_id = $works->service_id;
+            $this->description = $works->description;
+            $this->client = $works->client;
+            $this->url = $works->url;
+            $this->photos[] = $works->photo;
+        }
+         
         $this->update_id = $id;
         $this->button = 2;
     }
@@ -189,8 +201,12 @@ class Dashboard extends Component
                       ]);
 
         session()->flash('message','Added successfully!');
+        $this->button = 0;
 
-         $this->button = 0;
+    }
+
+    public function update_portifolio()
+    {
 
     }
 

@@ -8,40 +8,30 @@
       <div class="row">
 
         <div class="col-lg-8">
-          <h2 class="portfolio-title">This is an example of portfolio detail</h2>
-
-          <div class="portfolio-details-slider swiper">
+          <h2 class="portfolio-title">{{$detail->service->title}}</h2>
+           <div class="portfolio-details-slider swiper">
             <div class="swiper-wrapper align-items-center">
-
-              <div class="swiper-slide">
-                <img src="assets/img/portfolio/portfolio-details-1.jpg" alt="">
-              </div>
-
-              <div class="swiper-slide">
-                <img src="assets/img/portfolio/portfolio-details-2.jpg" alt="">
-              </div>
-
-              <div class="swiper-slide">
-                <img src="assets/img/portfolio/portfolio-details-3.jpg" alt="">
-              </div>
-
-            </div>
+               @foreach (json_decode($detail->photo) as $photos)
+                <div class="swiper-slide">
+                    <img src="{{ asset($photos)}}" height="400" width="600" alt="">
+                </div>
+                @endforeach
+             </div>
             <div class="swiper-pagination"></div>
           </div>
-
         </div>
 
         <div class="col-lg-4 portfolio-info">
-          <h3>Project information</h3>
+          <h3>Project Information</h3>
           <ul>
-            <li><strong>Category</strong>: Web design</li>
-            <li><strong>Client</strong>: ASU Company</li>
-            <li><strong>Project date</strong>: 01 March, 2020</li>
-            <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+            <li><strong>Category</strong>: {{$detail->service->title}}</li>
+            <li><strong>Client</strong>: {{$detail->client}}</li>
+            <li><strong>Project date</strong>: {{$detail->created_at}}</li>
+            <li><strong>Project URL</strong>: <a href="{{$detail->url}}">{{$detail->url}}</a></li>
           </ul>
 
           <p>
-            Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+            {{$detail->description}}
           </p>
         </div>
 

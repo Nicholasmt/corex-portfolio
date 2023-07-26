@@ -24,6 +24,8 @@
                 
              <div class="tab-pane fade @if($current == 2) show active  @endif" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
               <div class="card-body">
+
+                {{-- list services --}}
                   @if($button == 0 && $current ==2)
                   <h4 class="text-center">Manage Services</h4>
                   @if(Session::has('message'))
@@ -64,9 +66,9 @@
                         </table>
                        </div>
 
+                        {{-- add new service --}}
                        @elseif($button == 1 && $current ==2)
-
-                       <h4 class="text-center">Add New</h4>
+                         <h4 class="text-center">Add New</h4>
                           <div class="container col-lg-10 col-sm-12 col-md-12 ml-5">
                             <div class="form-group mt-3">
                                 <label for="title" class="">Title </label>
@@ -89,6 +91,7 @@
                             </div>
                         </div>
 
+                         {{-- update service --}}
                         @elseif($button == 2 && $current ==2)
 
                         <h4 class="text-center">Update</h4>
@@ -114,15 +117,12 @@
                               <button wire:click="remove_button" class="btn btn-secondary">Cancel</button>
                           </div>
                       </div>
-                        
                       @endif
-                       
-                      </div>
-                     
-                     </div>
-                
-                     <div class="tab-pane fade  @if($current == 3) show active @endif" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                        <div class="card-body">
+                    </div>
+                   </div>
+                   <div class="tab-pane fade  @if($current == 3) show active @endif" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                      <div class="card-body">
+                        {{-- list portfolio --}}
                         @if($button == 0 && $current == 3)
                            <h4 class="text-center">Manage Portfolios</h4>
                            @if(Session::has('message'))
@@ -171,7 +171,7 @@
                                         <td>{{$portfolio->url}}</td>
                                         <td>{{$portfolio->client}}</td>
                                         <td>
-                                            <button wire:click="update_button" class="btn btn-light"><span class="bi bi-pencil-square"></span></button>
+                                            <button wire:click="update_button({{$portfolio->id}})" class="btn btn-light"><span class="bi bi-pencil-square"></span></button>
                                             <button wire:click="delete_portfolio({{$portfolio->id}})" class="btn btn-danger"> <span class="bi bi-trash"></span></button>
                                         </td>
                                       </tr> 
@@ -183,10 +183,74 @@
                              </table>
                            </div>
 
-                           @elseif($button == 1 && $current == 3)
+                           {{-- update portfolio --}}
+                           @elseif($button == 2 && $current == 3)
 
-                           <h4 class="text-center">Add New</h4>
+                             <h4 class="text-center">Update</h4>
                               <div class="container col-lg-10 col-sm-12 col-md-12 ml-5">
+                                <div class="form-group mt-3">
+                                    <label for="service_id" class="">Service </label>
+                                    <select wire:model.defer="service_id" class="form-control">
+                                        <option value="">Select Option</option>
+                                      @foreach ($services as $service)
+                                        <option value="{{$service->id}}">{{$service->title}}</option>
+                                      @endforeach
+                                    </select>
+                                    @error('service_id') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label for="client" class="">Clients</label>
+                                    <input type="text" wire:model.defer="client" class="form-control">
+                                    @error('client') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label for="urls" class="">Url</label>
+                                    <input type="text" wire:model.defer="url" class="form-control">
+                                    @error('url') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label for="descriptions" class="">Description</label>
+                                    <textarea   wire:model.defer="description" class="form-control" rol="5"></textarea>
+                                    @error('description') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                                </div>
+ 
+                                <div class="form-group mt-2">
+                                    <label for="photo" class="">Photo</label>
+                                    <div x-data="{ isUploading: false, progress: 0}" 
+                                        x-on:livewire-upload-start="isUploading = true; progress: 5"
+                                        x-on:livewire-upload-finish="isUploading = false"
+                                        x-on:livewire-upload-error="isUploading = false"
+                                        x-on:livewire-upload-progress="progress = $event.detail.progress"
+                                        >
+                                        <input type="file" class="form-control-file" accept="image/png, image/gif, image/jpeg" wire:model="photos" multiple>
+                                        <div x-show="isUploading" class="mt-2">
+                                          <progress max="100" x-bind:value="progress"></progress><br>
+                                        </div>
+                                        
+                                    </div>
+                                     @error('photos.*') <span class="text-danger font-13 text-capitalize">{{$message}}</span> @enderror
+                                     @if (!is_string($photos))
+                                      @foreach ($photos as $photo)
+                                        @foreach (json_decode($photo) as $image)
+                                          <img src="{{ asset($image)}}" class="image_fit" height="170" width="214">
+                                        @endforeach
+                                      @endforeach
+                                     @elseif(is_string($photos))
+                                        Preview: <br>
+                                        @foreach ($photos as $photo)
+                                          <img src="{{ $photo->temporaryUrl() }}" class="image_fit" height="170" width="214">
+                                        @endforeach
+                                     @endif
+                                </div>
+                                <div class="mt-4">
+                                    <button wire:click="add_portfolio" class="btn btn-primary ml-4">Save</button>
+                                    <button wire:click="remove_button" class="btn btn-secondary">Cancel</button>
+                                </div>
+                            </div>
+                             {{-- add new portfolio --}}
+                            @elseif($button == 1 && $current == 3)
+
+                            <div class="container col-lg-10 col-sm-12 col-md-12 ml-5">
                                 <div class="form-group mt-3">
                                     <label for="service_id" class="">Service </label>
                                     <select wire:model.defer="service_id" class="form-control">
@@ -240,19 +304,16 @@
                                     <button wire:click="remove_button" class="btn btn-secondary">Cancel</button>
                                 </div>
                             </div>
-                            
-                          @endif
+                           @endif
+                        </div>
+                      </div> 
 
-                        </div>
-                    </div> 
-                
-                    <div class="tab-pane fade @if($current == 4) show active  @endif" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-                        <div class="card-body">
-                            <h4 class="text-center">Manage Profile</h4>
-                        </div>
+                      {{-- manage profile --}}
+                     <div class="tab-pane fade @if($current == 4) show active  @endif" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                        @include('back.settings')
                      </div>
 
-               </div>
+                </div>
             </div>
           </div>
        </div>
