@@ -18,7 +18,7 @@ class Dashboard extends Component
     public $title,$description,$icon;
     public $url,$client,$photos=[],$service_id;
     public $button,$update_id,$images=[];
-    public $name,$email,$password;
+    public $name,$email,$old_pass,$new_pass,$confirm_pass;
 
     public function render()
     {
@@ -312,6 +312,47 @@ class Dashboard extends Component
     }
 
     //   work query end
+
+
+    // profile
+
+    public function personal_info()
+    {
+        $this->validate(['name'=>'required',
+                        'email'=>'required',
+                       ]);
+
+        $id = session()->get('id');
+        User::where(['id'=>$id])->update(['name'=>$this->name,
+                                           'email'=>$this->email
+                                         ]);
+
+        session()->flash('message','Updated successfully!');
+    }
+    public function password()
+    {
+        $this->validate(['old_pass'=>'required',
+                        'new_pass'=>'required',
+                        'confirm_pass'=>'required|same:new_pass'
+                        ]);
+         $id = session()->get('id');
+        $user = User::where(['id'=>$id])->first();
+        if(\Hash::check($this->old_pass,$user->password))
+        {
+            User::where(['id'=>$id])->update(['password'=>$this->confirm]);
+            session()->flash('message','Updated successfully!');
+        }
+        else
+        {
+            $this->reset('old_pass');
+            $this->reset('new_pass');
+            $this->reset('confirm_pass');
+            session()->flash('error','Old password mismatch try again!');
+        }
+
+    }
+    
+   // profile ends
 
 
 }

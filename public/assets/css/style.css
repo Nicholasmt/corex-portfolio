@@ -5,6 +5,12 @@ body {
   position: relative;
   background: transparent;
 }
+
+.sidebar-bg{
+  background: #444444;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
 .modal{
   margin-top: 8%;
 }
@@ -12,6 +18,9 @@ body {
  z-index: -1 !important;
  background: #444444 !important;
  
+}
+.nav-pills .nav-link{
+  text-align: left !important;
 }
 
 body::before {
@@ -187,6 +196,17 @@ h6 {
   #header.header-top h1 {
     font-size: 26px;
   }
+  .nav-link
+  {
+     width: 78%;
+     margin-left: -8%;
+  }
+  .nav-text{
+    font-size: 10px; 
+  }
+  
+
+   
 }
 
 /*--------------------------------------------------------------
@@ -503,11 +523,7 @@ section .container {
   float: right;
   font-style: normal;
 }
-.sidebar-bg{
-  background: #444444;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
+
 .custom_text{
   color: #d21818;
   font-weight: 600;
