@@ -66,13 +66,11 @@ class Dashboard extends Component
         {
             Controller::create(['section'=>2]);
         }
-
-        
         session()->flash('section','2');
         $this->button = 0;
-
-       
+        
     }
+
     public function portfolio()
     {
         $controller = Controller::where(['id'=>1])->first();
@@ -84,13 +82,74 @@ class Dashboard extends Component
         {
             Controller::create(['section'=>3]);
         }
-
-        
         session()->flash('section','3');
         $this->button = 0;
-
-         
     }
+
+    
+    public function about()
+    {
+        $controller = Controller::where(['id'=>1])->first();
+        if($controller)
+        {
+            Controller::where(['id'=>1])->update(['section'=>5]);
+        }
+        else
+        {
+            Controller::create(['section'=>5]);
+        }
+        session()->flash('section','5');
+        $this->button = 0;
+    }
+
+    
+    public function education()
+    {
+        $controller = Controller::where(['id'=>1])->first();
+        if($controller)
+        {
+            Controller::where(['id'=>1])->update(['section'=>6]);
+        }
+        else
+        {
+            Controller::create(['section'=>6]);
+        }
+        session()->flash('section','6');
+        $this->button = 0;
+    }
+
+    
+    public function experience()
+    {
+        $controller = Controller::where(['id'=>1])->first();
+        if($controller)
+        {
+            Controller::where(['id'=>1])->update(['section'=>7]);
+        }
+        else
+        {
+            Controller::create(['section'=>7]);
+        }
+        session()->flash('section','7');
+        $this->button = 0;
+    }
+
+    
+    public function social()
+    {
+        $controller = Controller::where(['id'=>1])->first();
+        if($controller)
+        {
+            Controller::where(['id'=>1])->update(['section'=>8]);
+        }
+        else
+        {
+            Controller::create(['section'=>8]);
+        }
+        session()->flash('section','8');
+        $this->button = 0;
+    }
+
     public function settings()
     {
         $controller = Controller::where(['id'=>1])->first();

@@ -108,9 +108,9 @@
                     
                 </div>
                 @error('photos.*') <span class="text-danger font-13 text-capitalize">{{$message}}</span> @enderror
-                @php
+                {{-- @php
                     dd(gettype($photos));
-                @endphp
+                @endphp --}}
                 @if(isset($photos))
                    Preview: <br>
                    @foreach ($photos as $photo)
