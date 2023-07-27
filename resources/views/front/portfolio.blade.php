@@ -34,6 +34,7 @@
         @forelse ($works as $work)
          <div class="col-lg-4 col-md-6 portfolio-item fliter-{{$work->service->title}}">
           <div class="portfolio-wrap">
+            @if(!empty($work->photo))
             @foreach (json_decode($work->photo) as $photo)
              <img src="{{ asset($photo)}}" class="img-fluid" alt="">
              <div class="portfolio-info">
@@ -46,6 +47,7 @@
             </div>
             @break
             @endforeach
+            @endif
           </div>
         </div>
         @empty

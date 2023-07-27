@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Controller;
 use App\Models\Service;
 use App\Models\Work;
+use App\Models\User;
 use Livewire\WithFileUploads;
 
 class Dashboard extends Component
@@ -16,7 +17,8 @@ class Dashboard extends Component
     public $current,$services,$portfolios,$counter;
     public $title,$description,$icon;
     public $url,$client,$photos=[],$service_id;
-    public $button,$update_id;
+    public $button,$update_id,$images=[];
+    public $name,$email,$password;
 
     public function render()
     {
@@ -25,8 +27,15 @@ class Dashboard extends Component
         $this->counter = 1;
         $this->services = Service::all();
         $this->portfolios = Work::all();
-        // $this->add_button;
         return view('livewire.dashboard');
+    }
+
+    public function mount()
+    {
+       $id = session()->get('id');
+       $user = User::where(['id'=>$id])->first();
+       $this->name = $user->name;
+       $this->email = $user->email;
     }
 
     public function dashboard()
@@ -43,6 +52,7 @@ class Dashboard extends Component
         }
 
         session()->flash('section','1');
+        $this->button = 0;
 
      }
     public function services()
@@ -59,6 +69,7 @@ class Dashboard extends Component
 
         
         session()->flash('section','2');
+        $this->button = 0;
 
        
     }
@@ -76,6 +87,7 @@ class Dashboard extends Component
 
         
         session()->flash('section','3');
+        $this->button = 0;
 
          
     }
@@ -90,9 +102,8 @@ class Dashboard extends Component
         {
             Controller::create(['section'=>4]);
         }
-
-        
         session()->flash('section','4');
+        $this->button = 0;
     }
 
     public function add_button()
@@ -119,7 +130,8 @@ class Dashboard extends Component
             $this->description = $works->description;
             $this->client = $works->client;
             $this->url = $works->url;
-            $this->photos[] = $works->photo;
+             
+             
         }
          
         $this->update_id = $id;
@@ -152,25 +164,25 @@ class Dashboard extends Component
         $this->reset();
     }
 
+    
+    public function update_services($id)
+    {
+        // dd($id);
+        Service::where(['id'=>$id])->update(['title'=>$this->title,
+                                            'description'=>$this->description,
+                                            'icon'=>$this->icon
+                                           ]);
+       session()->flash('message','Updated successfully!');
+       $this->button = 0;
+    
+    }
+
     public function delete_services($id)
     {
         Service::where(['id'=>$id])->delete();
         session()->flash('message','Deleted successfully!');
         $this->emit('alert_remove');
     }
-
-    public function update_services($id)
-    {
-        // dd($id);
-         Service::where(['id'=>$id])->update(['title'=>$this->title,
-                                              'description'=>$this->description,
-                                              'icon'=>$this->icon
-                                            ]);
-        session()->flash('message','Updated successfully!');
-        $this->button = 0;
-        
-    }
-
     // services query ends
 
     //   work query starts
@@ -205,9 +217,33 @@ class Dashboard extends Component
 
     }
 
-    public function update_portifolio()
+    public function update_portifolio($id)
     {
+        // // dd('yes');
+        // if(is_string($this->photos))
+        // {
+          
+        // }
+        // elseif(!is_string($this->photos))
+        // {
+        //     dd('no');
+        // }
 
+        $photo_array=[];
+        foreach ($this->photos as $photo) 
+        {
+          $portfolio_photo = $photo->storeAs('portfolios', substr(rand(0,time()),0,5).'.png');
+          $photo_array[]= 'storage/app/'.$portfolio_photo;
+        }
+
+        Work::where(['id'=>$id])->update([ 'url'=>$this->title,
+                                           'description'=>$this->description,
+                                           'client'=>$this->client,
+                                            'photo'=>$photo_array
+                                           ]);
+                            
+       session()->flash('message','Updated successfully!');
+       $this->button = 0;
     }
 
     public function delete_portfolio($id)

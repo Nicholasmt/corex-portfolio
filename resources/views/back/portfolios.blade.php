@@ -31,6 +31,7 @@
                     <th scope="row">{{$counter++}}</th>
                     <td>{{$portfolio->service->title}}</td>
                     <td>
+                      @if(!empty($portfolio->photo))
                         @foreach (json_decode($portfolio->photo) as $photo)
                          <a href="{{ asset($photo)}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
                            <img src="{{ asset($photo)}}" height="50" width="50" alt="">
@@ -43,6 +44,7 @@
                             {{$portfolio->service->title}}"></a> 
                             @endforeach
                         </div> 
+                      @endif
                     </td>
                     <td>{{substr($portfolio->description, 0,20)}}...</td>
                     <td>{{$portfolio->url}}</td>
@@ -66,8 +68,8 @@
          <h4 class="text-center">Update</h4>
           <div class="container col-lg-10 col-sm-12 col-md-12 ml-5">
             <div class="form-group mt-3">
-                <label for="service_id" class="">Service </label>
-                <select wire:model.defer="service_id" class="form-control">
+                <label for="service_id" class="">Category </label>
+                <select wire:model.defer="service_id" class="form-control mt-2">
                     <option value="">Select Option</option>
                   @foreach ($services as $service)
                     <option value="{{$service->id}}">{{$service->title}}</option>
@@ -77,17 +79,17 @@
             </div>
             <div class="form-group mt-2">
                 <label for="client" class="">Clients</label>
-                <input type="text" wire:model.defer="client" class="form-control">
+                <input type="text" wire:model.defer="client" class="form-control mt-2">
                 @error('client') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
             </div>
             <div class="form-group mt-2">
                 <label for="urls" class="">Url</label>
-                <input type="text" wire:model.defer="url" class="form-control">
+                <input type="text" wire:model.defer="url" class="form-control mt-2">
                 @error('url') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
             </div>
             <div class="form-group mt-2">
                 <label for="descriptions" class="">Description</label>
-                <textarea   wire:model.defer="description" class="form-control" rol="5"></textarea>
+                <textarea wire:model.defer="description" class="form-control mt-2" rol="5"></textarea>
                 @error('description') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
             </div>
 
@@ -99,38 +101,49 @@
                     x-on:livewire-upload-error="isUploading = false"
                     x-on:livewire-upload-progress="progress = $event.detail.progress"
                     >
-                    <input type="file" class="form-control-file" accept="image/png, image/gif, image/jpeg" wire:model="photos" multiple>
+                    <input type="file" class="form-control-file mt-2" accept="image/png, image/gif, image/jpeg" wire:model="photos" multiple>
                     <div x-show="isUploading" class="mt-2">
                       <progress max="100" x-bind:value="progress"></progress><br>
                     </div>
                     
                 </div>
-                 @error('photos.*') <span class="text-danger font-13 text-capitalize">{{$message}}</span> @enderror
-                 @if (!is_string($photos))
-                  @foreach ($photos as $photo)
-                    @foreach (json_decode($photo) as $image)
-                      <img src="{{ asset($image)}}" class="image_fit" height="170" width="214">
+                @error('photos.*') <span class="text-danger font-13 text-capitalize">{{$message}}</span> @enderror
+                @php
+                    dd(gettype($photos));
+                @endphp
+                @if(isset($photos))
+                   Preview: <br>
+                   @foreach ($photos as $photo)
+                     <img src="{{$photo->temporaryUrl()}}" class="image_fit" height="170" width="214">
+                   @endforeach
+
+                 @elseif(!isset($photos))
+                  @php
+                      $works = App\Models\Work::where(['id'=>$update_id])->first();  
+                  @endphp
+                   {{-- @foreach ($images as $photo) --}}
+                     @if(!is_null($works->photo))
+                     Preview: <br>
+                    @foreach (json_decode($works->photo) as $photo)
+                      <img src="{{ asset($photo)}}" class="image_fit" height="170" width="214">
                     @endforeach
-                  @endforeach
-                 @elseif(is_string($photos))
-                    Preview: <br>
-                    @foreach ($photos as $photo)
-                      <img src="{{ $photo->temporaryUrl() }}" class="image_fit" height="170" width="214">
-                    @endforeach
+                    @endif
+                  {{-- @endforeach --}}
+                 
                  @endif
             </div>
             <div class="mt-4">
-                <button wire:click="add_portfolio" class="btn btn-primary ml-4">Save</button>
+                <button wire:click="update_portifolio({{$update_id}})" class="btn btn-primary ml-4">Update</button>
                 <button wire:click="remove_button" class="btn btn-secondary">Cancel</button>
             </div>
         </div>
          {{-- add new portfolio --}}
         @elseif($button == 1 && $current == 3)
-
-        <div class="container col-lg-10 col-sm-12 col-md-12 ml-5">
+          <h4 class="text-center">Add New</h4>
+           <div class="container col-lg-10 col-sm-12 col-md-12 ml-5">
             <div class="form-group mt-3">
-                <label for="service_id" class="">Service </label>
-                <select wire:model.defer="service_id" class="form-control">
+                <label for="service_id" class="">Category </label>
+                <select wire:model.defer="service_id" class="form-control mt-2">
                     <option value="">Select Option</option>
                   @foreach ($services as $service)
                     <option value="{{$service->id}}">{{$service->title}}</option>
@@ -140,17 +153,17 @@
             </div>
             <div class="form-group mt-2">
                 <label for="client" class="">Clients</label>
-                <input type="text" wire:model.defer="client" class="form-control">
+                <input type="text" wire:model.defer="client" class="form-control mt-2">
                 @error('client') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
             </div>
             <div class="form-group mt-2">
                 <label for="urls" class="">Url</label>
-                <input type="text" wire:model.defer="url" class="form-control">
+                <input type="text" wire:model.defer="url" class="form-control mt-2">
                 @error('url') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
             </div>
             <div class="form-group mt-2">
                 <label for="descriptions" class="">Description</label>
-                <textarea   wire:model.defer="description" class="form-control" rol="5"></textarea>
+                <textarea   wire:model.defer="description" class="form-control mt-2" rol="5"></textarea>
                 @error('description') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
             </div>
 
@@ -162,7 +175,7 @@
                     x-on:livewire-upload-error="isUploading = false"
                     x-on:livewire-upload-progress="progress = $event.detail.progress"
                     >
-                    <input type="file" class="form-control-file" accept="image/png, image/gif, image/jpeg" wire:model="photos" multiple>
+                    <input type="file" class="form-control-file mt-2" accept="image/png, image/gif, image/jpeg" wire:model="photos" multiple>
                     <div x-show="isUploading" class="mt-2">
                       <progress max="100" x-bind:value="progress"></progress><br>
                     </div>

@@ -46,17 +46,17 @@
               <div class="container col-lg-10 col-sm-12 col-md-12 ml-5">
                 <div class="form-group mt-3">
                     <label for="title" class="">Title </label>
-                    <input type="text" wire:model.defer="title" class="form-control">
+                    <input type="text" wire:model.defer="title" class="form-control mt-2">
                     @error('title') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                 </div>
                 <div class="form-group mt-2">
                     <label for="descriptions" class="">Descriptions</label>
-                    <input type="text" wire:model.defer="description" class="form-control">
+                    <input type="text" wire:model.defer="description" class="form-control mt-2">
                     @error('description') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                 </div>
                 <div class="form-group mt-2">
                     <label for="icon" class="">Icon</label>
-                    <input type="text" wire:model.defer="icon" class="form-control">
+                    <input type="text" wire:model.defer="icon" class="form-control mt-2">
                     @error('icon') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                 </div>
                 <div class="mt-4">
@@ -73,17 +73,17 @@
               <div class="form-group mt-3">
                   <label for="title" class="">Title </label>
                   {{-- <input type="text" wire:model.defer="id" value="{{$update_id}}"> --}}
-                  <input type="text" wire:model.defer="title" class="form-control">
+                  <input type="text" wire:model.defer="title" class="form-control mt-2">
                   @error('title') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
               </div>
               <div class="form-group mt-2">
                   <label for="descriptions" class="">Descriptions</label>
-                  <input type="text" wire:model.defer="description" class="form-control">
+                  <input type="text" wire:model.defer="description" class="form-control mt-2">
                   @error('description') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
               </div>
               <div class="form-group mt-2">
                 <label for="icon" class="">Icon</label>
-                <input type="text" wire:model.defer="icon" class="form-control">
+                <input type="text" wire:model.defer="icon" class="form-control mt-2">
                 @error('icon') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
             </div>
               <div class="mt-4">
