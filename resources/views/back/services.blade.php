@@ -7,7 +7,7 @@
         <span class="text-capitalize font-bold">{{session()->get('message')}}</span>
       </div>
       @endif
-         <div class="table-responsive container mt-3">
+         <div class="table-responsive containe mt-3">
             <table class="table table-dark table-hover">
                 <div class="float-end mt-3">
                     <button wire:click="add_button" class="btn btn-light mb-3">
@@ -43,7 +43,7 @@
             {{-- add new service --}}
            @elseif($button == 1 && $current ==2)
              <h4 class="text-center">Add New</h4>
-              <div class="container col-lg-10 col-sm-12 col-md-12 ml-5">
+              <div class="containe col-lg-10 col-sm-12 col-md-12 ml-5">
                 <div class="form-group mt-3">
                     <label for="title" class="">Title </label>
                     <input type="text" wire:model.defer="title" class="form-control mt-2">

@@ -6,6 +6,10 @@ use Livewire\Component;
 use App\Models\Controller;
 use App\Models\Service;
 use App\Models\Work;
+use App\Models\About;
+use App\Models\Experience;
+use App\Models\Educations;
+use App\Models\Social;
 use App\Models\User;
 use Livewire\WithFileUploads;
 
@@ -14,11 +18,15 @@ class Dashboard extends Component
     
     use WithFileUploads;
     
-    public $current,$services,$portfolios,$counter;
+    public $current,$services,$portfolios,$counter,$about,$experiences,$socials,$educations;
     public $title,$description,$icon;
     public $url,$client,$photos=[],$service_id;
     public $button,$update_id,$images=[];
     public $name,$email,$old_pass,$new_pass,$confirm_pass;
+    public $phone,$city,$address;
+    public $qualification,$institution,$started,$graduated;
+    public $organization,$location,$start_date,$end_date;
+     
 
     public function render()
     {
@@ -27,6 +35,10 @@ class Dashboard extends Component
         $this->counter = 1;
         $this->services = Service::all();
         $this->portfolios = Work::all();
+        $this->socials = Social::all();
+        $this->about = About::all();
+        $this->experiences = Experience::all();
+        $this->educations = Educations::all();
         return view('livewire.dashboard');
     }
 
@@ -189,7 +201,14 @@ class Dashboard extends Component
             $this->description = $works->description;
             $this->client = $works->client;
             $this->url = $works->url;
-             
+        }
+
+        if($this->current ==5)
+        {
+            $about = About::where(['id'=>$id])->first();
+            $this->phone = $about->phone;
+            $this->city = $about->city;
+            $this->address = $about->address;
              
         }
          
@@ -312,6 +331,47 @@ class Dashboard extends Component
     }
 
     //   work query end
+
+
+    // about starts
+
+    public function add_about()
+    {
+        $validation = $this->validate(['phone'=>'required',
+                                       'city'=>'required',
+                                       'address'=>'required'
+                                     ]);
+
+            About::create(['city'=>$this->city,
+                            'address'=>$this->address,
+                            'phone'=>$this->phone
+                            ]);
+
+            session()->flash('message','added successfully!');
+            $this->button = 0;
+            $this->reset();
+    }
+
+    public function update_about($id)
+    {
+        About::where(['id'=>$id])->update(['city'=>$this->city,
+                        'address'=>$this->address,
+                        'phone'=>$this->phone
+                        ]);
+
+        session()->flash('message','added successfully!');
+        $this->button = 0;
+         
+    }
+
+    public function delete_about($id)
+    {
+        About::where(['id'=>$id])->delete();
+        session()->flash('message','Deleted successfully!');
+        $this->emit('alert_remove');
+    }
+
+    // about ends
 
 
     // profile
