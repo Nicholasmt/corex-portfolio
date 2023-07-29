@@ -210,6 +210,7 @@ class Dashboard extends Component
             $this->phone = $trim_string;
             $this->city = $about->city;
             $this->address = $about->address;
+            $this->title = $about->title;
              
         }
          
@@ -353,13 +354,15 @@ class Dashboard extends Component
     {
         $validation = $this->validate(['phone'=>'required',
                                        'city'=>'required',
-                                       'address'=>'required'
+                                       'address'=>'required',
+                                       'title'=>'required'
                                      ]);
 
            $phone_array = explode(',',$this->phone);
            
             About::create(['city'=>$this->city,
                             'address'=>$this->address,
+                            'title'=>$this->title,
                             'phone'=>json_encode($phone_array)
                          ]);
 
@@ -374,9 +377,10 @@ class Dashboard extends Component
         $phone_array = explode(',',$this->phone);
 
         About::where(['id'=>$id])->update(['city'=>$this->city,
-                      'address'=>$this->address,
-                      'phone'=>json_encode($phone_array)
-                     ]);
+                                            'address'=>$this->address,
+                                            'title'=>$this->title,
+                                            'phone'=>json_encode($phone_array)
+                                         ]);
 
         session()->flash('message','added successfully!');
         $this->button = 0;

@@ -17,6 +17,7 @@
                    <thead>
                      <tr>
                        <th scope="col">No</th>
+                       <th scope="col">Content</th>
                        <th scope="col">Phone</th>
                        <th scope="col">Address</th>
                        <th scope="col">City</th>
@@ -27,6 +28,7 @@
                        @forelse ($about as $about)
                        <tr>
                          <th scope="row">{{$counter++}}</th>
+                         <td>{{substr($about->title,0,20)}}...</td>
                          <td>
                             @foreach (json_decode($about->phone) as $photos)
                                {{$photos}},
@@ -50,6 +52,11 @@
               @elseif($button == 1 && $current ==5)
                 <h4 class="text-center">Add New</h4>
                  <div class="containe col-lg-10 col-sm-12 col-md-12 ml-5">
+                    <div class="form-group mt-3">
+                        <label for="content" class="">Content</label>
+                        <textarea type="text" wire:model.defer="title" class="form-control mt-2" col="5"></textarea>
+                        @error('content') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                    </div>
                    <div class="form-group mt-3">
                        <label for="phone" class="">Phone </label>
                        <input type="text" wire:model.defer="phone" class="form-control mt-2">
@@ -76,6 +83,11 @@
    
                <h4 class="text-center">Update</h4>
                <div class="container col-lg-10 col-sm-12 col-md-12 ml-5">
+                <div class="form-group mt-3">
+                    <label for="content" class="">Content</label>
+                    <textarea type="text" wire:model.defer="title" class="form-control mt-2" col="5"></textarea>
+                    @error('content') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                </div>
                  <div class="form-group mt-3">
                      <label for="title" class="">Phone </label>
                      <input type="text" wire:model.defer="phone" class="form-control mt-2">
@@ -92,7 +104,7 @@
                    @error('address') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                </div>
                  <div class="mt-4">
-                     <button wire:click="update_services({{$update_id}})" class="btn btn-primary ml-4">Update</button>
+                     <button wire:click="update_about({{$update_id}})" class="btn btn-primary ml-4">Update</button>
                      <button wire:click="remove_button" class="btn btn-secondary">Cancel</button>
                  </div>
              </div>

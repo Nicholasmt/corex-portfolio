@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\Work;
+use App\Models\About;
+use App\Models\Experience;
+use App\Models\Educations;
+use App\Models\Social;
 
 class HomeController extends Controller
 {
@@ -19,10 +23,12 @@ class HomeController extends Controller
     }
     public function about()
     {
-        return view('front.about');
+        $abouts = About::all();
+        return view('front.about',compact('abouts'));
     }
     public function resume()
     {
+        
         return view('front.resume');
     }
     public function services()
