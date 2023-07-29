@@ -21,7 +21,7 @@ class Dashboard extends Component
     public $current,$services,$portfolios,$counter,$about,$experiences,$socials,$educations;
     public $title,$description,$icon;
     public $url,$client,$photos=[],$service_id;
-    public $button,$update_id,$images=[];
+    public $button,$update_id;
     public $name,$email,$old_pass,$new_pass,$confirm_pass;
     public $phone,$city,$address;
     public $qualification,$institution,$started,$graduated;
@@ -203,10 +203,11 @@ class Dashboard extends Component
             $this->url = $works->url;
         }
 
-        if($this->current ==5)
+        if($this->current == 5)
         {
             $about = About::where(['id'=>$id])->first();
-            $this->phone = $about->phone;
+            $trim_string=  str_replace(['["','"]','"','"'],"",$about->phone);
+            $this->phone = $trim_string;
             $this->city = $about->city;
             $this->address = $about->address;
              
@@ -342,10 +343,12 @@ class Dashboard extends Component
                                        'address'=>'required'
                                      ]);
 
+           $phone_array = explode(',',$this->phone);
+           
             About::create(['city'=>$this->city,
                             'address'=>$this->address,
-                            'phone'=>$this->phone
-                            ]);
+                            'phone'=>json_encode($phone_array)
+                         ]);
 
             session()->flash('message','added successfully!');
             $this->button = 0;
@@ -354,10 +357,13 @@ class Dashboard extends Component
 
     public function update_about($id)
     {
+
+        $phone_array = explode(',',$this->phone);
+        
         About::where(['id'=>$id])->update(['city'=>$this->city,
-                        'address'=>$this->address,
-                        'phone'=>$this->phone
-                        ]);
+                      'address'=>$this->address,
+                      'phone'=>json_encode($phone_array)
+                     ]);
 
         session()->flash('message','added successfully!');
         $this->button = 0;
