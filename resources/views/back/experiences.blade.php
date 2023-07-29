@@ -18,11 +18,12 @@
                      <tr>
                        <th scope="col">No</th>
                        <th scope="col">Title</th>
-                       <th scope="col">Institution</th>
-                       <th scope="col">Degree</th>
-                       <th scope="col">description</th>
-                       <th scope="col">Year of Entry</th>
-                       <th scope="col">Year of Graduation</th>
+                       <th scope="col">Organization</th>
+                       <th scope="col">City</th>
+                       <th scope="col">Location</th>
+                       <th scope="col">Description</th>
+                       <th scope="col">Start Year</th>
+                       <th scope="col">End Year</th>
                        <th scope="col">Actions</th>
                    </tr>
                    </thead>
@@ -31,11 +32,12 @@
                        <tr>
                          <th scope="row">{{$counter++}}</th>
                          <td>{{$experience->title}}</td>
-                         <td>{{$experience->Institution}}</td>
-                         <td>{{$experience->degree}}</td>
+                         <td>{{$experience->organization}}</td>
+                         <td>{{$experience->city}}</td>
+                         <td>{{$experience->location}}</td>
                          <td>{{$experience->description}}</td>
-                         <td>{{$experience->started}}</td>
-                         <td>{{$experience->graduated}}</td>
+                         <td>{{$experience->start_year}}</td>
+                         <td>{{$experience->end_year}}</td>
                          <td>
                            <button wire:click="update_button({{$experience->id}})" class="btn btn-light"><span class="bi bi-pencil-square"></span></button>
                            <button wire:click="delete_experience({{$experience->id}})" class="btn btn-danger"><span class="bi bi-trash"></span></button>
@@ -53,19 +55,19 @@
                 <h4 class="text-center">Add New</h4>
                  <div class="containe col-lg-10 col-sm-12 col-md-12 ml-5">
                     <div class="form-group mt-3">
-                        <label for="title" class="">title</label>
+                        <label for="title" class="">Title</label>
                         <input type="text" wire:model.defer="title" class="form-control mt-2">
                         @error('title') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                     </div>
                    <div class="form-group mt-3">
-                       <label for="institution" class="">Institution </label>
-                       <input type="text" wire:model.defer="institution" class="form-control mt-2">
-                       @error('institution') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                       <label for="organization" class="">Organization </label>
+                       <input type="text" wire:model.defer="organization" class="form-control mt-2">
+                       @error('organization') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                    </div>
                    <div class="form-group mt-2">
-                       <label for="degree" class="">Degree</label>
-                       <input type="text" wire:model.defer="degree" class="form-control mt-2">
-                       @error('degree') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                       <label for="city" class="">City</label>
+                       <input type="text" wire:model.defer="city" class="form-control mt-2">
+                       @error('city') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                    </div>
                    <div class="form-group mt-2">
                        <label for="description" class="">Description</label>
@@ -73,14 +75,19 @@
                        @error('description') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                    </div>
                    <div class="form-group mt-2">
-                    <label for="started" class="">Year of Entry</label>
-                    <input type="month" wire:model.defer="started" class="form-control mt-2">
-                    @error('started') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                    <label for="location" class="">Location</label>
+                    <input type="text" wire:model.defer="location" class="form-control mt-2">
+                    @error('location') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                 </div>
                 <div class="form-group mt-2">
-                    <label for="graduated" class="">Year of Graduation</label>
-                    <input type="month" wire:model.defer="graduated" class="form-control mt-2">
-                    @error('graduated') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                    <label for="start_year" class="">Start Year</label>
+                    <input type="month" wire:model.defer="start_year" class="form-control mt-2">
+                    @error('start_year') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                </div>
+                <div class="form-group mt-2">
+                    <label for="end_year" class="">End Year</label>
+                    <input type="month" wire:model.defer="end_year" class="form-control mt-2">
+                    @error('end_year') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                 </div>
                    <div class="mt-4">
                        <button wire:click="add_experience" class="btn btn-primary ml-4">Save</button>
@@ -95,18 +102,18 @@
                <div class="container col-lg-10 col-sm-12 col-md-12 ml-5">
                 <div class="form-group mt-3">
                     <label for="title" class="">Title</label>
-                    <textarea type="text" wire:model.defer="title" class="form-control mt-2">
+                    <input type="text" wire:model.defer="title" class="form-control mt-2">
                     @error('title') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                 </div>
                  <div class="form-group mt-3">
-                     <label for="institution" class="">Institution </label>
-                     <input type="text" wire:model.defer="institution" class="form-control mt-2">
-                     @error('institution') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                     <label for="organization" class="">Organization </label>
+                     <input type="text" wire:model.defer="organization" class="form-control mt-2">
+                     @error('organization') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                  </div>
                  <div class="form-group mt-2">
-                     <label for="degree" class="">Degree</label>
-                     <input type="text" wire:model.defer="degree" class="form-control mt-2">
-                     @error('degree') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                     <label for="city" class="">City</label>
+                     <input type="text" wire:model.defer="city" class="form-control mt-2">
+                     @error('city') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                  </div>
                  <div class="form-group mt-2">
                    <label for="description" class="">Description</label>
@@ -114,14 +121,19 @@
                    @error('description') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                  </div>
                  <div class="form-group mt-2">
-                    <label for="started" class="">Year of Entry</label>
-                    <input type="month" wire:model.defer="started" class="form-control mt-2"> 
-                    @error('started') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                    <label for="location" class="">Location</label>
+                    <input type="text" wire:model.defer="location" class="form-control mt-2"> 
+                    @error('location') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                 </div>
                 <div class="form-group mt-2">
-                    <label for="graduated" class="">Year of Graduation</label>
-                    <input type="month" wire:model.defer="graduated" class="form-control mt-2">
-                    @error('graduated') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                    <label for="start_year" class="">Start Year</label>
+                    <input type="month" wire:model.defer="start_year" class="form-control mt-2">
+                    @error('start_year') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                </div>
+                <div class="form-group mt-2">
+                    <label for="end_year" class="">End Year</label>
+                    <input type="month" wire:model.defer="end_year" class="form-control mt-2">
+                    @error('end_year') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                 </div>
                  <div class="mt-4">
                      <button wire:click="update_experience({{$update_id}})" class="btn btn-primary ml-4">Update</button>

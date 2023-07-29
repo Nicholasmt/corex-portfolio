@@ -25,7 +25,7 @@ class Dashboard extends Component
     public $name,$email,$old_pass,$new_pass,$confirm_pass;
     public $phone,$city,$address;
     public $degree,$institution,$started,$graduated;
-    public $organization,$location,$start_date,$end_date;
+    public $organization,$location,$start_year,$end_year;
     public $level;
      
 
@@ -226,6 +226,19 @@ class Dashboard extends Component
             $this->graduated = $education->graduated;
              
         }
+
+        if($this->current == 7)
+        {
+            $experience = Experience::where(['id'=>$id])->first();
+            $this->title = $experience->title;
+            $this->organization = $experience->organization;
+            $this->city = $experience->city;
+            $this->description = $experience->description;
+            $this->location = $experience->location;
+            $this->start_year = $experience->start_year;
+            $this->end_year = $experience->end_year;
+             
+        }
          
         $this->update_id = $id;
         $this->button = 2;
@@ -260,7 +273,11 @@ class Dashboard extends Component
     
     public function update_services($id)
     {
-        // dd($id);
+        $validation = $this->validate(['title'=>'required',
+                                        'description'=>'required',
+                                        'icon'=>'required'
+                                    ]);
+
         Service::where(['id'=>$id])->update(['title'=>$this->title,
                                             'description'=>$this->description,
                                             'icon'=>$this->icon
@@ -312,6 +329,13 @@ class Dashboard extends Component
 
     public function update_portifolio($id)
     {
+
+        $validation = $this->validate(['url'=>'required',
+                                        'client'=>'required',
+                                        'description'=>'required',
+                                        'service_id'=>'required'
+                                      ]);
+
         if(empty($this->photos))
         {
             // dd('yes');
@@ -387,6 +411,12 @@ class Dashboard extends Component
     public function update_about($id)
     {
 
+        $validation = $this->validate(['phone'=>'required',
+                                       'city'=>'required',
+                                       'address'=>'required',
+                                       'title'=>'required'
+                                     ]);
+
         $phone_array = explode(',',$this->phone);
 
         About::where(['id'=>$id])->update(['city'=>$this->city,
@@ -438,7 +468,14 @@ class Dashboard extends Component
     
         public function update_education($id)
         {
-    
+                $validation = $this->validate(['title'=>'required',
+                                                'institution'=>'required',
+                                                'description'=>'required',
+                                                'degree'=>'required',
+                                                'started'=>'required',
+                                                'graduated'=>'required'
+                                            ]);
+
             Educations::where(['id'=>$id])->update(['title'=>$this->title,
                                                     'institution'=>$this->institution,
                                                     'description'=>$this->description,
@@ -461,6 +498,68 @@ class Dashboard extends Component
     
         // education ends
 
+
+        // experience starts
+
+        public function add_experience()
+        {
+            $validation = $this->validate(['title'=>'required',
+                                            'organization'=>'required',
+                                            'description'=>'required',
+                                            'location'=>'required',
+                                            'city'=>'required',
+                                            'start_year'=>'required',
+                                            'end_year'=>'required'
+                                            ]);
+    
+             Experience::create(['title'=>$this->title,
+                                'organization'=>$this->organization,
+                                'description'=>$this->description,
+                                'location'=>$this->location,
+                                'city'=>$this->city,
+                                'start_year'=>$this->start_year,
+                                'end_year'=>$this->end_year,
+                                ]);
+    
+                session()->flash('message','added successfully!');
+                $this->button = 0;
+                $this->reset();
+        }
+    
+        public function update_experience($id)
+        {
+
+            $validation = $this->validate(['title'=>'required',
+                                            'organization'=>'required',
+                                            'description'=>'required',
+                                            'location'=>'required',
+                                            'city'=>'required',
+                                            'start_year'=>'required',
+                                            'end_year'=>'required'
+                                            ]);
+    
+            Experience::where(['id'=>$id])->update(['title'=>$this->title,
+                                                    'organization'=>$this->organization,
+                                                    'description'=>$this->description,
+                                                    'location'=>$this->location,
+                                                    'city'=>$this->city,
+                                                    'start_year'=>$this->start_year,
+                                                    'end_year'=>$this->end_year,
+                                                ]);
+    
+            session()->flash('message','Updated successfully!');
+            $this->button = 0;
+                
+        }
+    
+        public function delete_experience($id)
+        {
+            Experience::where(['id'=>$id])->delete();
+            session()->flash('message','Deleted successfully!');
+            $this->emit('alert_remove');
+        }
+    
+        // experience ends
 
     // profile
 
