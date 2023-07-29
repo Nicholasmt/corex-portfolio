@@ -24,8 +24,9 @@ class Dashboard extends Component
     public $button,$update_id;
     public $name,$email,$old_pass,$new_pass,$confirm_pass;
     public $phone,$city,$address;
-    public $qualification,$institution,$started,$graduated;
+    public $degree,$institution,$started,$graduated;
     public $organization,$location,$start_date,$end_date;
+    public $level;
      
 
     public function render()
@@ -395,6 +396,56 @@ class Dashboard extends Component
     }
 
     // about ends
+
+
+
+        // education starts
+
+        public function add_education()
+        {
+            $validation = $this->validate(['title'=>'required',
+                                           'institution'=>'required',
+                                           'description'=>'required',
+                                           'degree'=>'required',
+                                           'started'=>'required',
+                                           'graduated'=>'required'
+                                         ]);
+    
+               Education::create(['title'=>$this->title,
+                                'institution'=>$this->institution,
+                                'degree'=>$this->degree,
+                                'started'=>$this->started,
+                                'graduated'=>$this->graduated
+                             ]);
+    
+                session()->flash('message','added successfully!');
+                $this->button = 0;
+                $this->reset();
+        }
+    
+        public function update_education($id)
+        {
+    
+            Education::create(['title'=>$this->title,
+                                'institution'=>$this->institution,
+                                'degree'=>$this->degree,
+                                'started'=>$this->started,
+                                'graduated'=>$this->graduated
+                            ]);
+    
+            session()->flash('message','added successfully!');
+            $this->button = 0;
+             
+        }
+    
+        public function delete_education($id)
+        {
+            Education::where(['id'=>$id])->delete();
+            session()->flash('message','Deleted successfully!');
+            $this->emit('alert_remove');
+        }
+    
+        // education ends
 
 
     // profile

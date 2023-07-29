@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('institution');
             $table->string('degree');
             $table->string('description');
-            $table->date('started');
-            $table->date('graduated');
+            $table->string('started');
+            $table->string('graduated');
             $table->timestamps();
         });
     }

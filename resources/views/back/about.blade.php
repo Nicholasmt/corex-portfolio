@@ -17,7 +17,7 @@
                    <thead>
                      <tr>
                        <th scope="col">No</th>
-                       <th scope="col">Content</th>
+                       <th scope="col">Title</th>
                        <th scope="col">Phone</th>
                        <th scope="col">Address</th>
                        <th scope="col">City</th>
