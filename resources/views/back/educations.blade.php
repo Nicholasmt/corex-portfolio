@@ -31,7 +31,7 @@
                        <tr>
                          <th scope="row">{{$counter++}}</th>
                          <td>{{$education->title}}</td>
-                         <td>{{$education->Institution}}</td>
+                         <td>{{$education->institution}}</td>
                          <td>{{$education->degree}}</td>
                          <td>{{$education->description}}</td>
                          <td>{{$education->started}}</td>
@@ -53,8 +53,8 @@
                 <h4 class="text-center">Add New</h4>
                  <div class="containe col-lg-10 col-sm-12 col-md-12 ml-5">
                     <div class="form-group mt-3">
-                        <label for="title" class="">title</label>
-                        <textarea type="text" wire:model.defer="title" class="form-control mt-2" col="5"></textarea>
+                        <label for="title" class="">Title</label>
+                        <input type="text" wire:model.defer="title" class="form-control mt-2">
                         @error('title') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                     </div>
                    <div class="form-group mt-3">
@@ -95,7 +95,7 @@
                <div class="container col-lg-10 col-sm-12 col-md-12 ml-5">
                 <div class="form-group mt-3">
                     <label for="title" class="">Title</label>
-                    <textarea type="text" wire:model.defer="title" class="form-control mt-2" col="5"></textarea>
+                    <input type="text" wire:model.defer="title" class="form-control mt-2">
                     @error('title') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                 </div>
                  <div class="form-group mt-3">

@@ -214,6 +214,18 @@ class Dashboard extends Component
             $this->title = $about->title;
              
         }
+
+        if($this->current == 6)
+        {
+            $education = Educations::where(['id'=>$id])->first();
+            $this->title = $education->title;
+            $this->institution = $education->institution;
+            $this->degree = $education->degree;
+            $this->description = $education->description;
+            $this->started = $education->started;
+            $this->graduated = $education->graduated;
+             
+        }
          
         $this->update_id = $id;
         $this->button = 2;
@@ -411,8 +423,9 @@ class Dashboard extends Component
                                            'graduated'=>'required'
                                          ]);
     
-               Education::create(['title'=>$this->title,
+               Educations::create(['title'=>$this->title,
                                 'institution'=>$this->institution,
+                                'description'=>$this->description,
                                 'degree'=>$this->degree,
                                 'started'=>$this->started,
                                 'graduated'=>$this->graduated
@@ -426,21 +439,22 @@ class Dashboard extends Component
         public function update_education($id)
         {
     
-            Education::create(['title'=>$this->title,
-                                'institution'=>$this->institution,
-                                'degree'=>$this->degree,
-                                'started'=>$this->started,
-                                'graduated'=>$this->graduated
-                            ]);
+            Educations::where(['id'=>$id])->update(['title'=>$this->title,
+                                                    'institution'=>$this->institution,
+                                                    'description'=>$this->description,
+                                                    'degree'=>$this->degree,
+                                                    'started'=>$this->started,
+                                                    'graduated'=>$this->graduated
+                                                ]);
     
-            session()->flash('message','added successfully!');
+            session()->flash('message','Updated successfully!');
             $this->button = 0;
              
         }
     
         public function delete_education($id)
         {
-            Education::where(['id'=>$id])->delete();
+            Educations::where(['id'=>$id])->delete();
             session()->flash('message','Deleted successfully!');
             $this->emit('alert_remove');
         }
