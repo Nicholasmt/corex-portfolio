@@ -108,28 +108,25 @@
                     
                 </div>
                 @error('photos.*') <span class="text-danger font-13 text-capitalize">{{$message}}</span> @enderror
-                {{-- @php
-                    dd(gettype($photos));
-                @endphp --}}
-                @if(isset($photos))
+                 @php
+                   $works = App\Models\Work::where(['id'=>$update_id])->first(); 
+                 @endphp
+                @if(!empty($photos))
+                
                    Preview: <br>
                    @foreach ($photos as $photo)
-                     <img src="{{$photo->temporaryUrl()}}" class="image_fit" height="170" width="214">
+                      <img src="{{$photo->temporaryUrl()}}" class="image_fit" height="170" width="214">
                    @endforeach
 
-                 @elseif(!isset($photos))
-                  @php
-                      $works = App\Models\Work::where(['id'=>$update_id])->first();  
-                  @endphp
-                   {{-- @foreach ($images as $photo) --}}
-                     @if(!is_null($works->photo))
+                 @elseif(is_array(json_decode($works->photo)))
+                  
+                   @if(!is_null($works->photo))
                      Preview: <br>
                     @foreach (json_decode($works->photo) as $photo)
                       <img src="{{ asset($photo)}}" class="image_fit" height="170" width="214">
                     @endforeach
                     @endif
-                  {{-- @endforeach --}}
-                 
+                  
                  @endif
             </div>
             <div class="mt-4">

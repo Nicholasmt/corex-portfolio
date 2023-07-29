@@ -298,31 +298,44 @@ class Dashboard extends Component
 
     public function update_portifolio($id)
     {
-        // // dd('yes');
-        // if(is_string($this->photos))
-        // {
-          
-        // }
-        // elseif(!is_string($this->photos))
-        // {
-        //     dd('no');
-        // }
-
-        $photo_array=[];
-        foreach ($this->photos as $photo) 
+        if(empty($this->photos))
         {
-          $portfolio_photo = $photo->storeAs('portfolios', substr(rand(0,time()),0,5).'.png');
-          $photo_array[]= 'storage/app/'.$portfolio_photo;
-        }
-
-        Work::where(['id'=>$id])->update([ 'url'=>$this->title,
+            // dd('yes');
+            Work::where(['id'=>$id])->update([ 'url'=>$this->title,
                                            'description'=>$this->description,
                                            'client'=>$this->client,
-                                            'photo'=>$photo_array
                                            ]);
-                            
-       session()->flash('message','Updated successfully!');
-       $this->button = 0;
+
+            session()->flash('message','Updated successfully!');
+            $this->button = 0;
+          
+        }
+        else
+        {
+
+            // dd('no');
+            $photo_array=[];
+            foreach ($this->photos as $photo) 
+            {
+
+              $portfolio_photo = $photo->storeAs('portfolios', substr(rand(0,time()),0,5).'.png');
+              $photo_array[]= 'storage/app/'.$portfolio_photo;
+              session()->flash('message','Updated successfully!');
+              $this->button = 0;
+
+            }
+    
+            Work::where(['id'=>$id])->update([ 'url'=>$this->title,
+                                               'description'=>$this->description,
+                                               'client'=>$this->client,
+                                                'photo'=>$photo_array
+                                               ]);
+
+            session()->flash('message','Updated successfully!');
+            $this->button = 0;
+        }
+
+       
     }
 
     public function delete_portfolio($id)
@@ -359,7 +372,7 @@ class Dashboard extends Component
     {
 
         $phone_array = explode(',',$this->phone);
-        
+
         About::where(['id'=>$id])->update(['city'=>$this->city,
                       'address'=>$this->address,
                       'phone'=>json_encode($phone_array)
