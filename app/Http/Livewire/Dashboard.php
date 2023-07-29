@@ -237,8 +237,16 @@ class Dashboard extends Component
             $this->location = $experience->location;
             $this->start_year = $experience->start_year;
             $this->end_year = $experience->end_year;
-             
         }
+
+        
+        if($this->current == 8)
+        {
+            $social = Social::where(['id'=>$id])->first();
+            $this->title = $social->title;
+            $this->url = $social->url;
+            $this->icon = $social->icon;
+         }
          
         $this->update_id = $id;
         $this->button = 2;
@@ -560,6 +568,53 @@ class Dashboard extends Component
         }
     
         // experience ends
+
+
+        // social starts
+
+        public function add_social()
+        {
+            $validation = $this->validate(['url'=>'required',
+                                            'icon'=>'required',
+                                            'title'=>'required'
+                                          ]);
+    
+                Social::create(['url'=>$this->url,
+                                'icon'=>$this->icon,
+                                'title'=>$this->title
+                               ]);
+    
+                session()->flash('message','added successfully!');
+                $this->button = 0;
+                $this->reset();
+        }
+    
+        public function update_social($id)
+        {
+
+            $validation = $this->validate(['url'=>'required',
+                                           'icon'=>'required',
+                                           'title'=>'required'
+                                          ]);
+    
+            Social::where(['id'=>$id])->update(['url'=>$this->url,
+                                                     'icon'=>$this->icon,
+                                                     'title'=>$this->title
+                                                   ]);
+    
+            session()->flash('message','Updated successfully!');
+            $this->button = 0;
+                
+        }
+    
+        public function delete_social($id)
+        {
+            Social::where(['id'=>$id])->delete();
+            session()->flash('message','Deleted successfully!');
+            $this->emit('alert_remove');
+        }
+    
+    // social ends
 
     // profile
 

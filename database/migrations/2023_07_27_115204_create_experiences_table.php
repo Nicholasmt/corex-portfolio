@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('city');
             $table->string('location');
             $table->string('description');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->date('start_year');
+            $table->date('end_year');
             $table->timestamps();
         });
     }
