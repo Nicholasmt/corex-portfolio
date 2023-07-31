@@ -231,6 +231,7 @@ class Dashboard extends Component
         {
             $experience = Experience::where(['id'=>$id])->first();
             $trim_string=  str_replace(['["','"]','"','"'],"",$experience->description);
+            $this->service_id = $experience->service_id;
             $this->title = $experience->title;
             $this->organization = $experience->organization;
             $this->city = $experience->city;
@@ -518,9 +519,11 @@ class Dashboard extends Component
                                            'location'=>'required',
                                            'city'=>'required',
                                            'start_year'=>'required',
-                                           'end_year'=>'required'
+                                           'end_year'=>'required',
+                                           'service_id'=>'required'
                                          ]);
              $description_array = explode('.',$this->description);
+
              Experience::create(['title'=>$this->title,
                                  'organization'=>$this->organization,
                                  'description'=>json_encode($description_array),
@@ -528,6 +531,7 @@ class Dashboard extends Component
                                  'city'=>$this->city,
                                  'start_year'=>$this->start_year,
                                  'end_year'=>$this->end_year,
+                                 'service_id'=>$this->service_id
                                 ]);
     
                 session()->flash('message','added successfully!');
@@ -544,7 +548,8 @@ class Dashboard extends Component
                                             'location'=>'required',
                                             'city'=>'required',
                                             'start_year'=>'required',
-                                            'end_year'=>'required'
+                                            'end_year'=>'required',
+                                            'service_id'=>'required'
                                             ]);
 
             $description_array = explode('.',$this->description);
@@ -557,6 +562,7 @@ class Dashboard extends Component
                                                     'city'=>$this->city,
                                                     'start_year'=>$this->start_year,
                                                     'end_year'=>$this->end_year,
+                                                    'service_id'=>$this->service_id
                                                 ]);
     
             session()->flash('message','Updated successfully!');

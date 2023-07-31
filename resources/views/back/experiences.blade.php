@@ -55,6 +55,16 @@
                 <h4 class="text-center">Add New</h4>
                  <div class="containe col-lg-10 col-sm-12 col-md-12 ml-5">
                     <div class="form-group mt-3">
+                        <label for="service_id" class="">Category</label>
+                        <select wire:model.defer="service_id" class="form-control mt-2">
+                            <option value="">Select Option</option>
+                          @foreach ($services as $service)
+                            <option value="{{$service->id}}">{{$service->title}}</option>
+                          @endforeach
+                        </select>
+                        @error('service_id') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                    </div>
+                    <div class="form-group mt-3">
                         <label for="title" class="">Title</label>
                         <input type="text" wire:model.defer="title" class="form-control mt-2">
                         @error('title') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
@@ -71,7 +81,7 @@
                    </div>
                    <div class="form-group mt-2">
                        <label for="description" class="">Description</label>
-                       <textarea type="text" wire:model.defer="description" col="5" class="form-control mt-2"></textarea>
+                       <textarea type="text" wire:model.defer="description" rows="5" cols="5" class="form-control mt-2"></textarea>
                        @error('description') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                    </div>
                    <div class="form-group mt-2">
@@ -100,6 +110,16 @@
    
                <h4 class="text-center">Update</h4>
                <div class="container col-lg-10 col-sm-12 col-md-12 ml-5">
+                <div class="form-group mt-3">
+                    <label for="service_id" class="">Category</label>
+                    <select wire:model.defer="service_id" class="form-control mt-2">
+                        <option value="">Select Option</option>
+                      @foreach ($services as $service)
+                        <option value="{{$service->id}}">{{$service->title}}</option>
+                      @endforeach
+                    </select>
+                    @error('service_id') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
+                </div>
                 <div class="form-group mt-3">
                     <label for="title" class="">Title</label>
                     <input type="text" wire:model.defer="title" class="form-control mt-2">

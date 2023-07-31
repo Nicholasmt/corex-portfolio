@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('organization');
             $table->string('city');
             $table->string('location');
-            $table->string('description');
-            $table->date('start_year');
-            $table->date('end_year');
+            $table->longText('description');
+            $table->string('start_year');
+            $table->string('end_year');
             $table->timestamps();
 
             $table->foreign('service_id')
