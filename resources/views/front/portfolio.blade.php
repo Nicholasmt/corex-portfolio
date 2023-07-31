@@ -15,17 +15,10 @@
           <ul id="portfolio-flters">
             <li data-filter="*" class="filter-active">All</li>
             @forelse ($services as $service)
-
-            <li data-filter=".fliter-{{$service->title}}">{{$service->title}}</li>
-                
-            @empty
-            
-            {{-- <li data-filter=".filter-card">3D</li> --}}
-            <li>No Data Found</li>
-
-
+              <li data-filter=".fliter-{{$service->title}}">{{$service->title}}</li>
+             @empty
+             <li>No Data Found</li>
             @endforelse
-            {{-- <li data-filter=".filter-web">Web</li> --}}
           </ul>
         </div>
       </div>
