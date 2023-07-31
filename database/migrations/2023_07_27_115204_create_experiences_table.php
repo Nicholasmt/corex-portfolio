@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('experiences', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('service_id')->unsigned();
             $table->string('title');
             $table->string('organization');
             $table->string('city');
@@ -23,6 +24,12 @@ return new class extends Migration
             $table->date('start_year');
             $table->date('end_year');
             $table->timestamps();
+
+            $table->foreign('service_id')
+            ->references('id')
+            ->on('services')
+            ->onDelete('cascade');
+
         });
     }
 
