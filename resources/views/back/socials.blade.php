@@ -20,12 +20,14 @@
                        <th scope="col">Title</th>
                        <th scope="col">Url</th>
                        <th scope="col">Icon</th>
+                       <th scope="col">Actions</th>
                     </tr>
                    </thead>
                    <tbody>
                        @forelse ($socials as $social)
                        <tr>
                          <th scope="row">{{$counter++}}</th>
+                         <th scope="row">{{$social->title}}</th>
                          <td scope="row">{{$social->url}}</td>
                          <td scope="row">{{$social->icon}}</td>
                          <td>

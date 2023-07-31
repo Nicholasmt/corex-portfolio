@@ -74,12 +74,12 @@
                    </div>
                    <div class="form-group mt-2">
                     <label for="started" class="">Year of Entry</label>
-                    <input type="month" wire:model.defer="started" class="form-control mt-2">
+                    <input type="text" wire:model.defer="started" class="form-control mt-2">
                     @error('started') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                 </div>
                 <div class="form-group mt-2">
                     <label for="graduated" class="">Year of Graduation</label>
-                    <input type="month" wire:model.defer="graduated" class="form-control mt-2">
+                    <input type="text" wire:model.defer="graduated" class="form-control mt-2">
                     @error('graduated') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                 </div>
                    <div class="mt-4">
@@ -115,12 +115,12 @@
                  </div>
                  <div class="form-group mt-2">
                     <label for="started" class="">Year of Entry</label>
-                    <input type="month" wire:model.defer="started" class="form-control mt-2"> 
+                    <input type="text" wire:model.defer="started" class="form-control mt-2"> 
                     @error('started') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                 </div>
                 <div class="form-group mt-2">
                     <label for="graduated" class="">Year of Graduation</label>
-                    <input type="month" wire:model.defer="graduated" class="form-control mt-2">
+                    <input type="text" wire:model.defer="graduated" class="form-control mt-2">
                     @error('graduated') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                 </div>
                  <div class="mt-4">

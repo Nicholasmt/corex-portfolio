@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Experience;
+use App\Models\About;
+use App\Models\Educations;
 
 class PortfolioController extends Controller
 {
@@ -15,6 +18,15 @@ class PortfolioController extends Controller
     {
         return view('back.dashboard');
     }
+
+    public function print()
+    {
+        $abouts = About::all();
+        $experiences = Experience::all();
+        $educations = Educations::all();
+        return view('back.print',compact('abouts','experiences','educations'));
+    }
+
 
     /**
      * Show the form for creating a new resource.

@@ -35,7 +35,7 @@
                          <td>{{$experience->organization}}</td>
                          <td>{{$experience->city}}</td>
                          <td>{{$experience->location}}</td>
-                         <td>{{$experience->description}}</td>
+                         <td>{{substr($experience->description,0,30)}}...</td>
                          <td>{{$experience->start_year}}</td>
                          <td>{{$experience->end_year}}</td>
                          <td>
@@ -81,12 +81,12 @@
                 </div>
                 <div class="form-group mt-2">
                     <label for="start_year" class="">Start Year</label>
-                    <input type="month" wire:model.defer="start_year" class="form-control mt-2">
+                    <input type="text" wire:model.defer="start_year" class="form-control mt-2">
                     @error('start_year') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                 </div>
                 <div class="form-group mt-2">
                     <label for="end_year" class="">End Year</label>
-                    <input type="month" wire:model.defer="end_year" class="form-control mt-2">
+                    <input type="text" wire:model.defer="end_year" class="form-control mt-2">
                     @error('end_year') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                 </div>
                    <div class="mt-4">
@@ -117,7 +117,7 @@
                  </div>
                  <div class="form-group mt-2">
                    <label for="description" class="">Description</label>
-                   <textarea type="text" wire:model.defer="description" class="form-control mt-2" col="5"></textarea>
+                   <textarea type="text" wire:model.defer="description" class="form-control mt-2"cols="30" rows="10"></textarea>
                    @error('description') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                  </div>
                  <div class="form-group mt-2">
@@ -127,12 +127,12 @@
                 </div>
                 <div class="form-group mt-2">
                     <label for="start_year" class="">Start Year</label>
-                    <input type="month" wire:model.defer="start_year" class="form-control mt-2">
+                    <input type="text" wire:model.defer="start_year" class="form-control mt-2">
                     @error('start_year') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                 </div>
                 <div class="form-group mt-2">
                     <label for="end_year" class="">End Year</label>
-                    <input type="month" wire:model.defer="end_year" class="form-control mt-2">
+                    <input type="text" wire:model.defer="end_year" class="form-control mt-2">
                     @error('end_year') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
                 </div>
                  <div class="mt-4">

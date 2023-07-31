@@ -230,10 +230,11 @@ class Dashboard extends Component
         if($this->current == 7)
         {
             $experience = Experience::where(['id'=>$id])->first();
+            $trim_string=  str_replace(['["','"]','"','"'],"",$experience->description);
             $this->title = $experience->title;
             $this->organization = $experience->organization;
             $this->city = $experience->city;
-            $this->description = $experience->description;
+            $this->description = $trim_string;
             $this->location = $experience->location;
             $this->start_year = $experience->start_year;
             $this->end_year = $experience->end_year;
@@ -512,21 +513,21 @@ class Dashboard extends Component
         public function add_experience()
         {
             $validation = $this->validate(['title'=>'required',
-                                            'organization'=>'required',
-                                            'description'=>'required',
-                                            'location'=>'required',
-                                            'city'=>'required',
-                                            'start_year'=>'required',
-                                            'end_year'=>'required'
-                                            ]);
-    
+                                           'organization'=>'required',
+                                           'description'=>'required',
+                                           'location'=>'required',
+                                           'city'=>'required',
+                                           'start_year'=>'required',
+                                           'end_year'=>'required'
+                                         ]);
+             $description_array = explode('.',$this->description);
              Experience::create(['title'=>$this->title,
-                                'organization'=>$this->organization,
-                                'description'=>$this->description,
-                                'location'=>$this->location,
-                                'city'=>$this->city,
-                                'start_year'=>$this->start_year,
-                                'end_year'=>$this->end_year,
+                                 'organization'=>$this->organization,
+                                 'description'=>json_encode($description_array),
+                                 'location'=>$this->location,
+                                 'city'=>$this->city,
+                                 'start_year'=>$this->start_year,
+                                 'end_year'=>$this->end_year,
                                 ]);
     
                 session()->flash('message','added successfully!');
@@ -536,7 +537,7 @@ class Dashboard extends Component
     
         public function update_experience($id)
         {
-
+              
             $validation = $this->validate(['title'=>'required',
                                             'organization'=>'required',
                                             'description'=>'required',
@@ -545,10 +546,13 @@ class Dashboard extends Component
                                             'start_year'=>'required',
                                             'end_year'=>'required'
                                             ]);
-    
+
+            $description_array = explode('.',$this->description);
+            // dd(json_encode($description_array));
+
             Experience::where(['id'=>$id])->update(['title'=>$this->title,
                                                     'organization'=>$this->organization,
-                                                    'description'=>$this->description,
+                                                    'description'=>json_encode($description_array),
                                                     'location'=>$this->location,
                                                     'city'=>$this->city,
                                                     'start_year'=>$this->start_year,

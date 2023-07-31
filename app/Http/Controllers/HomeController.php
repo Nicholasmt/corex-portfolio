@@ -9,6 +9,7 @@ use App\Models\About;
 use App\Models\Experience;
 use App\Models\Educations;
 use App\Models\Social;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -19,17 +20,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('front.home');
+        $socials = Social::all();
+        return view('front.home',compact('socials'));
     }
     public function about()
     {
         $abouts = About::all();
-        return view('front.about',compact('abouts'));
+        $socials = Social::all();
+        return view('front.about',compact('abouts','socials'));
     }
     public function resume()
     {
-        
-        return view('front.resume');
+        $abouts = About::all();
+        $experiences = Experience::all();
+        $educations = Educations::all();
+        return view('front.resume',compact('abouts','experiences','educations'));
+
     }
     public function services()
     {
@@ -50,7 +56,9 @@ class HomeController extends Controller
     }
     public function contact()
     {
-        return view('front.contact');
+        $abouts = about::all();
+        $socials = Social::all();
+        return view('front.contact',compact('abouts','socials'));
     }
 
     public function login()

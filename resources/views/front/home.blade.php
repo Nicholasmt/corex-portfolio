@@ -23,10 +23,11 @@
 
       
       <div class="social-links">
-        <a href="https://twiter.com/corex_designs" class="twitter"><i class="bi bi-twitter"></i></a>
-        <a href="https://github.com/Nicholasmt" class="github"><i class="bi bi-github"></i></a>
-        <a href="https://instagram.com/nicholasmt09?igshid=MzNlNGNkZWQ4Mg==" class="instagram"><i class="bi bi-instagram"></i></a>
-        <a href="https://linkedin.com/in/nicholas-tochukwu-09a381181" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        @forelse ($socials as $social)
+          <a href="{{$social->url}}" class="twitter"><i class="{{$social->icon}}"></i></a>
+        @empty
+          No Data Found!
+        @endforelse
       </div>
 
     </div>

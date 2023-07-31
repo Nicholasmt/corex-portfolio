@@ -17,7 +17,12 @@
           <div class="info-box">
             <i class="bx bx-map"></i>
             <h3>My Address</h3>
-            <p>Always Online</p>
+            @forelse ($abouts as $about)
+              <p>{{$about->address}}</p>
+              @break
+             @empty
+              No Data Found!  
+            @endforelse
           </div>
         </div>
 
@@ -26,10 +31,12 @@
             <i class="bx bx-share-alt"></i>
             <h3>Social Profiles</h3>
             <div class="social-links">
-                <a href="https://twiter.com/corex_designs" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="https://github.com/Nicholasmt" class="github"><i class="bi bi-github"></i></a>
-                <a href="https://instagram.com/nicholasmt09?igshid=MzNlNGNkZWQ4Mg==" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="https://linkedin.com/in/nicholas-tochukwu-09a381181" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                @forelse ($socials as $social)
+                  <a href="{{$social->url}}" class="twitter"><i class="{{$social->icon}}"></i></a>
+                 @empty
+                 No Data Found!  
+                @endforelse
+                
            </div>
           </div>
         </div>
@@ -45,7 +52,16 @@
           <div class="info-box">
             <i class="bx bx-phone-call"></i>
             <h3>Call Me</h3>
-            <p>+234 708 430 8528 || +234 816 363 9865</p>
+            @forelse ($abouts as $about)
+             <p> 
+              @foreach (json_decode($about->phone) as $phone)
+                 {{$phone}} ||
+              @endforeach
+             </p>
+            @break
+           @empty
+            No Data Found!  
+          @endforelse
           </div>
         </div>
       </div>

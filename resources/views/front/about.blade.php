@@ -43,12 +43,6 @@
                 @empty
                  No Data Found!   
                 @endforelse
-              </ul>
-            </div>
-            <div class="col-lg-6">
-              <ul>
-                <li><i class="bi bi-chevron-right"></i> <strong>linkedin:</strong> <span> http://linkedin.com/in/nicholas-tochukwu-09a381181</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>Github:</strong> <span> https://github.com/Nicholasmt</span></li>
                 <li><i class="bi bi-chevron-right"></i> <strong>Mail:</strong> <span>nicholasmt09@gmail.com</span></li>
                 @forelse ($abouts as $about)
                 <li><i class="bi bi-chevron-right"></i> <strong>Address:</strong> <span>{{$about->address}}</span></li>
@@ -56,6 +50,17 @@
                 @empty
                 No Data Found!   
                 @endforelse
+              </ul>
+            </div>
+            <div class="col-lg-6">
+              <ul>
+                @forelse ($socials as $social)
+                  <li><i class="bi bi-chevron-right"></i> <strong>{{$social->title}}:</strong> <span> {{$social->url}} </span></li>
+                  {{-- <li><i class="bi bi-chevron-right"></i> <strong>Github:</strong> <span> https://github.com/Nicholasmt</span></li> --}}
+                  @empty
+                  No Data Found!
+                @endforelse
+               
               </ul>
             </div>
           </div>
