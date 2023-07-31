@@ -57,6 +57,9 @@
           @endforelse
         </div>
         <div class="col-lg-6">
+          @foreach ($services as $service)
+            <a href="" class="btn btn-primary">{{$service->title}}</a> 
+          @endforeach
           <h3 class="resume-title">Professional Experience</h3>
           @forelse ($experiences as $experience)
           <div class="resume-item">

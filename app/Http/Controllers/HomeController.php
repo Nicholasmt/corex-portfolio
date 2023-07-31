@@ -31,10 +31,11 @@ class HomeController extends Controller
     }
     public function resume()
     {
+        $services = Service::all();
         $abouts = About::all();
         $experiences = Experience::all();
         $educations = Educations::all();
-        return view('front.resume',compact('abouts','experiences','educations'));
+        return view('front.resume',compact('abouts','experiences','educations','services'));
 
     }
     public function services()
