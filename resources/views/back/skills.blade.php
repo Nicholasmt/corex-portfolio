@@ -75,14 +75,8 @@
                     <input type="number" wire:model.defer="level" class="form-control mt-2">
                     @error('level') <span class="text-danger font-13 text-capitalize">{{$message}}</span> @enderror
                 </div>
-                 <div class="form-group mt-3">
-                     <label for="icon" class="">icon </label>
-                     <input type="text" wire:model.defer="icon" class="form-control mt-2">
-                     @error('icon') <span class="text-danger font-13 text-capitalize">{{$message}}</span> @enderror
-                 </div>
-                
                  <div class="mt-4">
-                     <button wire:click="update_social({{$update_id}})" class="btn btn-primary ml-4">Update</button>
+                     <button wire:click="update_skill({{$update_id}})" class="btn btn-primary ml-4">Update</button>
                      <button wire:click="remove_button" class="btn btn-secondary">Cancel</button>
                  </div>
              </div>

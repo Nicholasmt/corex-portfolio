@@ -11,6 +11,7 @@ use App\Models\Experience;
 use App\Models\Educations;
 use App\Models\Social;
 use App\Models\User;
+use App\Models\Skill;
 use Livewire\WithFileUploads;
 
 class Dashboard extends Component
@@ -26,7 +27,7 @@ class Dashboard extends Component
     public $phone,$city,$address;
     public $degree,$institution,$started,$graduated;
     public $organization,$location,$start_year,$end_year;
-    public $level;
+    public $level,$skills;
      
 
     public function render()
@@ -40,6 +41,13 @@ class Dashboard extends Component
         $this->about = About::all();
         $this->experiences = Experience::all();
         $this->educations = Educations::all();
+        $this->skills = Skill::all();
+
+        $id = session()->get('id');
+        $user = User::where(['id'=>$id])->first();
+        $this->name = $user->name;
+        $this->email = $user->email;
+
         return view('livewire.dashboard');
     }
 
@@ -265,6 +273,13 @@ class Dashboard extends Component
             $this->url = $social->url;
             $this->icon = $social->icon;
          }
+
+         if($this->current == 9)
+        {
+            $skill = SocSkillial::where(['id'=>$id])->first();
+            $this->title = $skill->title;
+            $this->level = $skill->level;
+          }
          
         $this->update_id = $id;
         $this->button = 2;
@@ -641,6 +656,49 @@ class Dashboard extends Component
         }
     
     // social ends
+
+    
+        // social starts
+
+        public function add_skill()
+        {
+            $validation = $this->validate(['level'=>'required',
+                                           'title'=>'required'
+                                          ]);
+    
+                Skill::create(['level'=>$this->level,
+                                'title'=>$this->title
+                               ]);
+    
+                session()->flash('message','added successfully!');
+                $this->button = 0;
+                $this->reset();
+        }
+    
+        public function update_skill($id)
+        {
+
+            $validation = $this->validate(['level'=>'required',
+                                           'title'=>'required'
+                                          ]);
+    
+            Skill::where(['id'=>$id])->update(['level'=>$this->level,
+                                                'title'=>$this->title
+                                              ]);
+    
+            session()->flash('message','Updated successfully!');
+            $this->button = 0;
+                
+        }
+    
+        public function delete_skill($id)
+        {
+            Skill::where(['id'=>$id])->delete();
+            session()->flash('message','Deleted successfully!');
+            $this->emit('alert_remove');
+        }
+    
+    // Skills ends
 
     // profile
 

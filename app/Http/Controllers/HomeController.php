@@ -10,6 +10,7 @@ use App\Models\Experience;
 use App\Models\Educations;
 use App\Models\Social;
 use App\Models\User;
+use App\Models\Skill;
 
 class HomeController extends Controller
 {
@@ -25,9 +26,10 @@ class HomeController extends Controller
     }
     public function about()
     {
+        $skills = Skill::all();
         $abouts = About::all();
         $socials = Social::all();
-        return view('front.about',compact('abouts','socials'));
+        return view('front.about',compact('abouts','socials','skills'));
     }
     public function resume()
     {
