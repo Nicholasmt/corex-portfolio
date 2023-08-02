@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Experience;
 use App\Models\About;
 use App\Models\Educations;
+use App\Models\Service;
 
 class PortfolioController extends Controller
 {
@@ -21,10 +22,11 @@ class PortfolioController extends Controller
 
     public function print()
     {
+        $services = Service::all();
         $abouts = About::all();
         $experiences = Experience::all();
         $educations = Educations::all();
-        return view('back.print',compact('abouts','experiences','educations'));
+        return view('back.print',compact('abouts','experiences','educations','services'));
     }
 
 

@@ -115,6 +115,22 @@ class Dashboard extends Component
         $this->button = 0;
     }
 
+        
+    public function skills()
+    {
+        $controller = Controller::where(['id'=>1])->first();
+        if($controller)
+        {
+            Controller::where(['id'=>1])->update(['section'=>9]);
+        }
+        else
+        {
+            Controller::create(['section'=>9]);
+        }
+        session()->flash('section','5');
+        $this->button = 0;
+    }
+
     
     public function education()
     {

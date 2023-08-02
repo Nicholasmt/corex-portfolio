@@ -4,7 +4,6 @@
 <!-- ======= Portfolio Section ======= -->
 <section id="portfolio" class="portfolio section-show">
     <div class="container">
-
       <div class="section-title">
         <h2>Portfolio</h2>
         <p>My Works</p>

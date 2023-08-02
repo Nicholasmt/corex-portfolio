@@ -13,6 +13,7 @@
                 <button wire:click="education" class="nav-link mt-2 @if($current == 6) active @endif" id="v-pills-education-tab" data-bs-toggle="pill" data-bs-target="#v-pills-education" type="button" role="tab" aria-controls="v-pills-education" aria-selected="false"><i class="bi bi-collection"></i> <span class="nav-text"> Education</span></button>
                 <button wire:click="experience" class="nav-link mt-2 @if($current == 7) active @endif" id="v-pills-experience-tab" data-bs-toggle="pill" data-bs-target="#v-pills-experience" type="button" role="tab" aria-controls="v-pills-experience" aria-selected="false"><i class="bi bi-briefcase"></i> <span class="nav-text"> Experiences</span></button>
                 <button wire:click="social" class="nav-link mt-2 @if($current == 8) active @endif" id="v-pills-social-tab" data-bs-toggle="pill" data-bs-target="#v-pills-social" type="button" role="tab" aria-controls="v-pills-socials" aria-selected="false"><i class="bi bi-medium"></i> <span class="nav-text"> Socials</span></button>
+                <button wire:click="skills" class="nav-link mt-2 @if($current == 9) active @endif" id="v-pills-skills-tab" data-bs-toggle="pill" data-bs-target="#v-pills-skills" type="button" role="tab" aria-controls="v-pills-skills" aria-selected="false"> <i class="bi bi-person-fill-gear"></i> <span class="nav-text"> Skills</span></button>
                 <button wire:click="settings" class="nav-link mt-2 @if($current == 4) active @endif" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"> <i class="bi bi-person-fill-gear"></i> <span class="nav-text"> Settings</span></button>
                 <a href="{{ route('logout')}}" class="nav-link mt-2 ml-3"> <i class="bi bi-box-arrow-right"></i> Logout</a>
              </div>
@@ -52,6 +53,11 @@
                 <div class="tab-pane fade  @if($current == 8) show active @endif" id="v-pills-social" role="tabpanel" aria-labelledby="v-pills-social-tab">
                     @include('back.socials') 
                 </div> 
+
+                 {{-- Skills --}}
+                <div class="tab-pane fade  @if($current == 9) show active @endif" id="v-pills-skills" role="tabpanel" aria-labelledby="v-pills-skills-tab">
+                  @include('back.skills') 
+              </div>
 
                 {{-- manage profile --}}
                 <div class="tab-pane fade @if($current == 4) show active  @endif" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">

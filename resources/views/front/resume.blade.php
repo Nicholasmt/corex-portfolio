@@ -56,38 +56,47 @@
            No Data Found!   
           @endforelse
         </div>
-        {{-- Experiences --}}
+
+        {{-- Experiences Start --}}
+
         <div class="col-lg-6">
-          <h3 class="mb-3">Experience Categories</h3><hr>
-          <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-             @forelse ($services as $service) 
-             <li class="nav-item" role="presentation">
-                <button class="nav-link  @foreach ($experiences as $experience) @if($service->id == $experience->service_id ) active @endif @break @endforeach" id="pills-{{$service->id}}-tab" data-bs-toggle="pill" data-bs-target="#pills-{{$service->id}}" type="button" role="tab" aria-controls="pills-{{$service->id}}" aria-selected="true">{{$service->title}}</button>
-             </li>
-           @endforeach 
-          </ul>
-          <div class="tab-content" id="pills-tabContent">
-           <h3 class="resume-title">Professional Experience</h3>
-            @forelse ($experiences as $experience)
-            <div class="tab-pane fade @foreach ($services as $service) @if($service->id == $experience->service_id ) show active @endif @endforeach" id="pills-{{$experience->service_id}}" role="tabpanel" aria-labelledby="pills-{{$experience->service_id}}-tab">
+
+          <div id="portfolio" class="portfolio">
+             <div class="row">
+              <div class="col-lg-12 d-flex justify-content-center">
+                <ul id="portfolio-flters">
+                  <li data-filter="*" class="filter-active">All</li>
+                  @forelse ($services as $service)
+                    <li data-filter=".fliter-{{$service->title}}">{{$service->title}}</li>
+                   @empty
+                   <li>No Data Found</li>
+                  @endforelse
+                </ul>
+              </div>
+            </div>
+          <h3 class="resume-title">Professional Experience</h3>
+          <div class="portfolio-container">
+           @forelse ($experiences as $experience)
+             <div class="portfolio-item fliter-{{$experience->category->title}}">
               <div class="resume-item">
-                <h4>{{$experience->title}}</h4>
+                <h4>{{$experience->title}}</h4> 
                 <h5>{{$experience->start_year." - ".$experience->end_year}}</h5>
                 <p><em>{{$experience->location}} </em></p>
                 <p>
                 <ul>
                   @foreach (json_decode($experience->description) as $content)
                     <li>{{$content}}</li>
-                    @endforeach
-                 </ul>
+                  @endforeach
+                </ul>
                 </p>
+                </div>
               </div>
-              @empty
-                 No Data Found! 
-              </div>
-              @endforelse
-            </div>
-        </div>
+            @empty
+             No Data Found! 
+            @endforelse
+          </div> 
+         </div>
+      </div>
         {{-- Experiences Ends --}}
       </div>
     </div>
