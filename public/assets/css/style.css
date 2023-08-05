@@ -353,6 +353,7 @@ h6 {
 .navbar-mobile a:focus {
   font-size: 16px;
   position: relative;
+  margin-left: 1%;
 }
 
 /*--------------------------------------------------------------

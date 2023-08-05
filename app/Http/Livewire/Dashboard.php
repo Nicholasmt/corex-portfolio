@@ -309,6 +309,7 @@ class Dashboard extends Component
         session()->flash('message','added successfully!');
         $this->button = 0;
         $this->reset();
+        $this->emit('alert_remove');
     }
 
     
@@ -325,6 +326,7 @@ class Dashboard extends Component
                                            ]);
        session()->flash('message','Updated successfully!');
        $this->button = 0;
+       $this->emit('alert_remove');
     
     }
 
@@ -365,6 +367,7 @@ class Dashboard extends Component
 
         session()->flash('message','Added successfully!');
         $this->button = 0;
+        $this->emit('alert_remove');
 
     }
 
@@ -380,13 +383,14 @@ class Dashboard extends Component
         if(empty($this->photos))
         {
             // dd('yes');
-            Work::where(['id'=>$id])->update([ 'url'=>$this->title,
+            Work::where(['id'=>$id])->update(['url'=>'http://'.$this->url,
                                            'description'=>$this->description,
                                            'client'=>$this->client,
                                            ]);
 
             session()->flash('message','Updated successfully!');
             $this->button = 0;
+            $this->emit('alert_remove');
           
         }
         else
@@ -412,6 +416,7 @@ class Dashboard extends Component
 
             session()->flash('message','Updated successfully!');
             $this->button = 0;
+            $this->emit('alert_remove');
         }
 
        
@@ -421,6 +426,7 @@ class Dashboard extends Component
     {
         Work::where('id',$id)->delete(); 
         session()->flash('message','Deleted successfully!');
+        $this->emit('alert_remove');
     }
 
     //   work query end
@@ -447,6 +453,7 @@ class Dashboard extends Component
             session()->flash('message','added successfully!');
             $this->button = 0;
             $this->reset();
+            $this->emit('alert_remove');
     }
 
     public function update_about($id)
@@ -468,6 +475,7 @@ class Dashboard extends Component
 
         session()->flash('message','added successfully!');
         $this->button = 0;
+        $this->emit('alert_remove');
          
     }
 
@@ -505,6 +513,7 @@ class Dashboard extends Component
                 session()->flash('message','added successfully!');
                 $this->button = 0;
                 $this->reset();
+                $this->emit('alert_remove');
         }
     
         public function update_education($id)
@@ -527,6 +536,7 @@ class Dashboard extends Component
     
             session()->flash('message','Updated successfully!');
             $this->button = 0;
+            $this->emit('alert_remove');
              
         }
     
@@ -568,6 +578,7 @@ class Dashboard extends Component
                 session()->flash('message','added successfully!');
                 $this->button = 0;
                 $this->reset();
+                $this->emit('alert_remove');
         }
     
         public function update_experience($id)
@@ -598,6 +609,7 @@ class Dashboard extends Component
     
             session()->flash('message','Updated successfully!');
             $this->button = 0;
+            $this->emit('alert_remove');
                 
         }
     
@@ -628,6 +640,7 @@ class Dashboard extends Component
                 session()->flash('message','added successfully!');
                 $this->button = 0;
                 $this->reset();
+                $this->emit('alert_remove');
         }
     
         public function update_social($id)
@@ -645,6 +658,7 @@ class Dashboard extends Component
     
             session()->flash('message','Updated successfully!');
             $this->button = 0;
+            $this->emit('alert_remove');
                 
         }
     
@@ -673,6 +687,7 @@ class Dashboard extends Component
                 session()->flash('message','added successfully!');
                 $this->button = 0;
                 $this->reset();
+                $this->emit('alert_remove');
         }
     
         public function update_skill($id)
@@ -688,6 +703,7 @@ class Dashboard extends Component
     
             session()->flash('message','Updated successfully!');
             $this->button = 0;
+            $this->emit('alert_remove');
                 
         }
     
@@ -705,15 +721,16 @@ class Dashboard extends Component
     public function personal_info()
     {
         $this->validate(['name'=>'required',
-                        'email'=>'required',
-                       ]);
+            'email'=>'required',
+            ]);
 
-        $id = session()->get('id');
-        User::where(['id'=>$id])->update(['name'=>$this->name,
-                                           'email'=>$this->email
-                                         ]);
+            $id = session()->get('id');
+            User::where(['id'=>$id])->update(['name'=>$this->name,
+                        'email'=>$this->email
+                        ]);
 
-        session()->flash('message','Updated successfully!');
+            session()->flash('message','Updated successfully!');
+            $this->emit('alert_remove');
     }
     public function password()
     {
@@ -725,8 +742,9 @@ class Dashboard extends Component
         $user = User::where(['id'=>$id])->first();
         if(\Hash::check($this->old_pass,$user->password))
         {
-            User::where(['id'=>$id])->update(['password'=>$this->confirm]);
+            User::where(['id'=>$id])->update(['password'=>\Hash::make($this->confirm_pass)]);
             session()->flash('message','Updated successfully!');
+            $this->emit('alert_remove');
         }
         else
         {
@@ -734,6 +752,7 @@ class Dashboard extends Component
             $this->reset('new_pass');
             $this->reset('confirm_pass');
             session()->flash('error','Old password mismatch try again!');
+            $this->emit('alert_remove');
         }
 
     }

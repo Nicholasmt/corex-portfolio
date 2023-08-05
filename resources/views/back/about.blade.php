@@ -2,11 +2,14 @@
     {{-- list services --}}
          @if($button == 0 && $current ==5)
          <h4 class="text-center">Manage About</h4>
+
          @if(Session::has('message'))
          <div class="alert alert-success">
            <span class="text-capitalize font-bold">{{session()->get('message')}}</span>
          </div>
+          
          @endif
+
             <div class="table-responsive containe mt-3">
                <table class="table table-dark table-hover">
                    <div class="float-end mt-3">

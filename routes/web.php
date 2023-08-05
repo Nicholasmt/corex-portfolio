@@ -24,6 +24,8 @@ Route::get('login', [App\Http\Controllers\HomeController::class, 'login'])->name
 Route::get('logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 Route::get('redirect', [App\Http\Controllers\AuthController::class, 'redirect'])->name('redirect');
 
+Route::get('artisan', [App\Http\Controllers\PortfolioController::class, 'artisan'])->name('artisan');
+
 
 Route::group(['prefix'=>'admin' ,'as'=>'admin','middleware'=>'admin'], function(){
 

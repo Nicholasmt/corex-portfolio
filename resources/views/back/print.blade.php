@@ -16,32 +16,32 @@
 </style>
  <!-- ======= Resume Section ======= -->
  <section id="resume" class="resume section-show">
-  <div class="container">
-
-    <div class="section-title">
-      <h2>Resume</h2>
+  <div class="container print-margin">
+     <div class="section-title">
+      <h2 class="print-title">Resume</h2>
       @if (Session::get('authentication') == true)
-      <a href="{{ route('admin-print')}}" class="btn btn-light float-end"> Print</a>
+      <a id="print" class="btn btn-light float-end"> Print</a>
       @endif
-      <p>Check My Resume</p>
+      <p class="print-title">My Resume</p>
     </div>
    <div class="row">
       <div class="col-lg-6">
-        <h3 class="resume-title">Sumary</h3>
+        <h3 class="resume-title print-title">Sumary</h3>
         <div class="resume-item pb-0">
           <h4>Nicholas Tochukwu</h4>
           @forelse ($abouts as $about)
-          <p>
-            <em>{{$about->title}} </em></p>
-          <p>
+          <p class="print-title">
+            <em>{{$about->title}} </em>
+          </p>
+         
            @break     
           @empty
           No Data Found!
           @endforelse
           <ul>
             @forelse ($about as $abot)
-            <li>{{$about->address}}</li>
-            <li>
+            <li class="print-text">{{$about->address}}</li>
+            <li class="print-text">
               @foreach (json_decode($about->phone) as $phone)
                 {{$phone}} ||
               @endforeach
@@ -50,18 +50,18 @@
             @empty
             No Data Found!   
             @endforelse
-            <li>nicholasmt09@gmail.com</li>
+            <li class="print-text">nicholasmt09@gmail.com</li>
           </ul>
           </p>
         </div>
 
-        <h3 class="resume-title">Education</h3>
+        <h3 class="resume-title print-title">Education</h3>
          @forelse ($educations as $education)
           <div class="resume-item">
             <h4>{{$education->title}}</h4>
-            <h5>{{$education->started." - ".$education->graduated}}</h5>
-            <p><em>{{$education->institution}}</em></p>
-            <p>{{$education->description}}</p>
+            <h5 class="print-text">{{$education->started." - ".$education->graduated}}</h5>
+            <p><em class="print-text">{{$education->institution}}</em></p>
+            <p class="print-text">{{$education->description}}</p>
           </div>
         @empty
          No Data Found!   
@@ -74,7 +74,7 @@
 
         <div id="portfolio" class="portfolio">
 
-           <div class="row">
+           <div class="row" id="print">
             <div class="col-lg-10 d-flex justify-content-center">
               <ul id="portfolio-flters">
                 <li data-filter="*" class="filter-active">All</li>
@@ -86,11 +86,11 @@
               </ul>
             </div>
           </div>
-          <h3 class="resume-title">Professional Experience</h3>
+          <h3 class="resume-title print-title">Professional Experience</h3>
         <div class="portfolio-container">
          @forelse ($experiences as $experience)
            <div class="portfolio-item fliter-{{$experience->category->title}}">
-            <div class="resume-item">
+            <div class="resume-item print-text">
               <h4>{{$experience->title}}</h4> 
               <h5>{{$experience->start_year." - ".$experience->end_year}}</h5>
               <p><em>{{$experience->location}} </em></p>
@@ -117,7 +117,11 @@
 @endsection
 
 @section('script')
- 
+<script>
+  $("#print").on("click", function(e){
+    window.print();
+  });
+</script>
 @endsection
 
 

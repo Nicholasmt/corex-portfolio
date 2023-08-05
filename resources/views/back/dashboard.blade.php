@@ -18,14 +18,21 @@
 
 @livewireScripts
 @stack('scripts')
-{{-- <script>
+<script>
        $(document).ready(function(){
         window.livewire.on('alert_remove',()=>{
           setTimeout(function(){ $(".alert-success").fadeOut('fast');
           }, 3000);
         });
     });
-</script> --}}
+</script>
+@production
+  <script>
+      Livewire.onError(function (message, response) {
+          return false;
+      });
+  </script>
+@endproduction
 @endsection
 
 

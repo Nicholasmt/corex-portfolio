@@ -31,6 +31,7 @@
 @include('layouts.footer')
 <!-- JS Files -->
  
+<script src="{{ asset('assets/js/jquery-3.7.0.min.js')}}"></script>
 <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js')}}"></script>
 <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.js')}}"></script>
 <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -38,7 +39,6 @@
 <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
 <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
 <script src="{{ asset('assets/vendor/waypoints/noframework.waypoints.js')}}"></script>
-<script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
 <script src="{{ asset('assets/js/main.js')}}"></script>
 
 @section('script')

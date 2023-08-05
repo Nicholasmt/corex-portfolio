@@ -29,6 +29,12 @@ class PortfolioController extends Controller
         return view('back.print',compact('abouts','experiences','educations','services'));
     }
 
+    public function artisan()
+    {
+        $artisan = Artisan::call("storage:link");
+        dd($artisan);
+    }
+
 
     /**
      * Show the form for creating a new resource.
