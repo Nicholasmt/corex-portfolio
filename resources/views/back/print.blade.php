@@ -15,7 +15,7 @@
     
 </style>
  <!-- ======= Resume Section ======= -->
- <section id="resume" class="resume section-show">
+ <section id="resume" class="resume section-show print-bg">
   <div class="container print-margin">
      <div class="section-title">
       <h2 class="print-title">Resume</h2>

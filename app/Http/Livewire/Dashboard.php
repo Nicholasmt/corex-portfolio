@@ -396,7 +396,16 @@ class Dashboard extends Component
         else
         {
 
-            // dd('no');
+            // delete old photo
+            $work = Work::where('id',$id)->first(); 
+            foreach(json_decode($work->photo) as $exist)
+            {
+                if(file_exists($exist))
+                {
+                    unlink($exist);
+                }
+            }
+
             $photo_array=[];
             foreach ($this->photos as $photo) 
             {
@@ -408,7 +417,7 @@ class Dashboard extends Component
 
             }
     
-            Work::where(['id'=>$id])->update([ 'url'=>$this->title,
+            Work::where(['id'=>$id])->update([ 'url'=>'http://'.$this->url,
                                                'description'=>$this->description,
                                                'client'=>$this->client,
                                                 'photo'=>$photo_array
@@ -424,9 +433,21 @@ class Dashboard extends Component
 
     public function delete_portfolio($id)
     {
+
+        // delete upload file or images
+       $work = Work::where('id',$id)->first(); 
+       foreach(json_decode($work->photo) as $exist)
+       {
+           if(file_exists($exist))
+           {
+               unlink($exist);
+           }
+       }
+
         Work::where('id',$id)->delete(); 
         session()->flash('message','Deleted successfully!');
         $this->emit('alert_remove');
+
     }
 
     //   work query end

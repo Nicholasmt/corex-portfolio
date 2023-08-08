@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('works', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('service_id')->unsigned();
-            $table->string('photo');
+            $table->longText('photo');
             $table->string('description');
             $table->string('url');
             $table->string('client')->nullable();
