@@ -6,11 +6,11 @@
        <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link" href="{{ route('index')}}">Home</a></li>
-          <li><a class="nav-link" href="{{ route('about')}}">About</a></li>
-          <li><a class="nav-link" href="{{ route('resume')}}">Resume</a></li>
-          <li><a class="nav-link" href="{{ route('services')}}">Services</a></li>
-          <li><a class="nav-link" href="{{ route('portfolio')}}">Portfolio</a></li>
-          <li><a class="nav-link" href="{{ route('contact')}}">Contact</a></li>
+          <li><a class="nav-link {{ (request()->is('about')) ? 'active' : '' }}" href="{{ route('about')}}">About</a></li>
+          <li><a class="nav-link {{ (request()->is('resume')) ? 'active' : '' }}" href="{{ route('resume')}}">Resume</a></li>
+          <li><a class="nav-link {{ (request()->is('services')) ? 'active' : '' }}" href="{{ route('services')}}">Services</a></li>
+          <li><a class="nav-link {{ (request()->is('portfolio')) ? 'active' : '' }}" href="{{ route('portfolio')}}">Portfolio</a></li>
+          <li><a class="nav-link {{ (request()->is('contact')) ? 'active' : '' }}" href="{{ route('contact')}}">Contact</a></li>
           @if (Session::get('authentication') == true)
           <li><a class="btn btn-primary" href="{{ route('admin-dashboard')}}">Dashboard</a></li>  
           @endif
