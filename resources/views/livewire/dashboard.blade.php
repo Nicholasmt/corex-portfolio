@@ -25,6 +25,38 @@
                 <div class="tab-pane fade @if(!Session::has('section') && $current == 1) show active @elseif($current == 1) show active @endif" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                   <div class="card-body">
                     <h4 class="text-center">Dashboard</h4>
+                    <div class="container">
+                    <div class="row">
+                      <div class="col-xl-4 col-sm-12 col-md-6">
+                         <div class="card">
+                          <div class="card-body">
+                            <a href="" class="text-black">
+                            <h3 class=""> <i class="bi bi-bell-fill"></i> Messages </h3>
+                            <p class="font"> 30</p>
+                          </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-4 col-sm-12 col-md-6">
+                        <div class="card">
+                         <div class="card-body">
+                           <h3 class=""> <i class="bi bi-image-fill"></i> Portfolios </h3>
+                           <p class="font"> {{$portfolios->count()}}</p>
+                         </div>
+                       </div>
+                     </div>
+                     <div class="col-xl-4 col-sm-12 col-md-6">
+                      <div class="card">
+                       <div class="card-body">
+                        <h3 class=""> <i class="bi bi-briefcase-fill"></i> Experiences </h3>
+                        <p class="font"> {{$experiences->count()}}</p>
+                       </div>
+                     </div>
+                   </div>
+                   
+                  </div>
+                  </div>
+
                  </div>
                </div>
                 

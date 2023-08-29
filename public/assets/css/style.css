@@ -9,6 +9,11 @@ body {
 .img{
   object-fit:contain;
 }
+.font{
+  font-size: 25px;
+  font-weight: 700;
+  color: #d21818;
+}
 
 .sidebar-bg{
   background: #444444;
