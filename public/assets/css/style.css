@@ -6,6 +6,10 @@ body {
   background: transparent;
 }
 
+.img{
+  object-fit:contain;
+}
+
 .sidebar-bg{
   background: #444444;
   padding-top: 1.5rem;

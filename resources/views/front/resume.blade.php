@@ -82,6 +82,7 @@
                 <h4>{{$experience->title}}</h4> 
                 <h5>{{$experience->start_year." - ".$experience->end_year}}</h5>
                 <p><em>{{$experience->location}} </em></p>
+                <p><em>{{$experience->organization}} </em></p>
                 <p>
                 <ul>
                   @foreach (json_decode($experience->description) as $content)

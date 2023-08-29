@@ -13,7 +13,7 @@
             <div class="swiper-wrapper align-items-center">
                @foreach (json_decode($detail->photo) as $photos)
                 <div class="swiper-slide">
-                    <img src="{{ asset($photos)}}" height="400" width="600" alt="">
+                    <img src="{{ asset($photos)}}" height="400" width="600" class="img" alt="">
                 </div>
                 @endforeach
              </div>
