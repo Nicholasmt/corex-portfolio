@@ -30,9 +30,9 @@
                       <div class="col-xl-4 col-sm-12 col-md-6">
                          <div class="card">
                           <div class="card-body">
-                            <a href="" class="text-black">
+                            <a href="javascript:void(0)" wire:click="message" class="text-black">
                             <h3 class=""> <i class="bi bi-bell-fill"></i> Messages </h3>
-                            <p class="font"> 30</p>
+                            <p class="font"> {{$messages->count()}} </p>
                           </a>
                           </div>
                         </div>
@@ -59,6 +59,11 @@
 
                  </div>
                </div>
+
+                {{-- Messages --}}
+                <div class="tab-pane fade  @if($current == 10) show active @endif" id="v-pills-contact_message" role="tabpanel" aria-labelledby="v-pills-contact_message-tab">
+                  @include('back.messages') 
+                </div>
                 
                {{-- services --}}
               <div class="tab-pane fade @if($current == 2) show active  @endif" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
@@ -89,7 +94,9 @@
                  {{-- Skills --}}
                 <div class="tab-pane fade  @if($current == 9) show active @endif" id="v-pills-skills" role="tabpanel" aria-labelledby="v-pills-skills-tab">
                   @include('back.skills') 
-              </div>
+                </div>
+
+               
 
                 {{-- manage profile --}}
                 <div class="tab-pane fade @if($current == 4) show active  @endif" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">

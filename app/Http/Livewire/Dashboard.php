@@ -13,13 +13,14 @@ use App\Models\Social;
 use App\Models\User;
 use App\Models\Skill;
 use Livewire\WithFileUploads;
+use App\Models\Message;
 
 class Dashboard extends Component
 { 
     
     use WithFileUploads;
     
-    public $current,$services,$portfolios,$counter,$about,$experiences,$socials,$educations;
+    public $current,$services,$portfolios,$counter,$about,$experiences,$socials,$educations,$messages,$view_message;
     public $title,$description,$icon;
     public $url,$client,$photos=[],$service_id;
     public $button,$update_id;
@@ -38,6 +39,7 @@ class Dashboard extends Component
         $this->services = Service::all();
         $this->portfolios = Work::all();
         $this->socials = Social::all();
+        $this->messages = Message::all();
         $this->about = About::all();
         $this->experiences = Experience::all();
         $this->educations = Educations::all();
@@ -156,6 +158,8 @@ class Dashboard extends Component
     }
 
     
+
+    
     public function experience()
     {
         $controller = Controller::where(['id'=>1])->first();
@@ -184,6 +188,21 @@ class Dashboard extends Component
             Controller::create(['section'=>8]);
         }
         session()->flash('section','8');
+        $this->button = 0;
+    }
+
+    public function message()
+    {
+        $controller = Controller::where(['id'=>1])->first();
+        if($controller)
+        {
+            Controller::where(['id'=>1])->update(['section'=>10]);
+        }
+        else
+        {
+            Controller::create(['section'=>10]);
+        }
+        session()->flash('section','10');
         $this->button = 0;
     }
 
@@ -693,7 +712,7 @@ class Dashboard extends Component
     // social ends
 
     
-        // social starts
+        // skill starts
 
         public function add_skill()
         {
@@ -737,8 +756,16 @@ class Dashboard extends Component
     
     // Skills ends
 
-    // profile
 
+    // view Message
+    public function view_message($id)
+    {
+        $this->button = 1;
+       $this->view_message = Message::where(['id'=>$id])->first();
+    }
+  // Message Ends
+
+    // profile
     public function personal_info()
     {
         $this->validate(['name'=>'required',

@@ -7,6 +7,7 @@ use App\Models\Experience;
 use App\Models\About;
 use App\Models\Educations;
 use App\Models\Service;
+use App\Models\Contact;
 
 class PortfolioController extends Controller
 {
