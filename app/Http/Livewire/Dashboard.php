@@ -39,7 +39,7 @@ class Dashboard extends Component
         $this->services = Service::all();
         $this->portfolios = Work::all();
         $this->socials = Social::all();
-        $this->messages = Message::all();
+        $this->messages = Message::where('status',0)->get();
         $this->about = About::all();
         $this->experiences = Experience::all();
         $this->educations = Educations::all();
@@ -761,7 +761,8 @@ class Dashboard extends Component
     public function view_message($id)
     {
         $this->button = 1;
-       $this->view_message = Message::where(['id'=>$id])->first();
+        $this->view_message = Message::where(['id'=>$id])->first();
+        Message::where(['id'=>$id])->update(['status'=>1]);
     }
   // Message Ends
 

@@ -12,9 +12,9 @@
             <div class="table-responsive containe mt-3">
                <table class="table table-dark table-hover">
                    <div class="float-end mt-3">
-                       <button wire:click="add_button" class="btn btn-light mb-3">
+                       {{-- <button wire:click="add_button" class="btn btn-light mb-3">
                          <i class="bi bi-plus"></i>
-                       </button>
+                       </button> --}}
                    </div>
                    <thead>
                      <tr>

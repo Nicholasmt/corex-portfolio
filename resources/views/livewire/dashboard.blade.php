@@ -32,7 +32,9 @@
                           <div class="card-body">
                             <a href="javascript:void(0)" wire:click="message" class="text-black">
                             <h3 class=""> <i class="bi bi-bell-fill"></i> Messages </h3>
-                            <p class="font"> {{$messages->count()}} </p>
+                             
+                              <p class="font"> {{$messages->count()}} </p>
+                             
                           </a>
                           </div>
                         </div>

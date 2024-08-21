@@ -32,7 +32,7 @@ class PortfolioController extends Controller
 
     public function artisan()
     {
-        $artisan = Artisan::call("storage:link");
+        $artisan = \Artisan::call("storage:link");
         dd($artisan);
     }
 
