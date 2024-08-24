@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('role_id')->unsigned();
+            $table->bigInteger('role_id')->unsigned()->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('google_id')->nullbale();
+            $table->string('google_id')->nullable();
             $table->rememberToken()->nullable();
             $table->timestamps();
 
