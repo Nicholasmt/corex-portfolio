@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->bigInteger('level');
+            $table->boolean('active')->default(0);
             $table->timestamps();
         });
     }

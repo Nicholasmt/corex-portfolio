@@ -20,7 +20,7 @@
         <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
           <h3>Software Developer &amp; 3D Designer</h3>
           <p class="fst-italic">
-            @forelse ($abouts as $about)
+            @forelse ($contacts as $about)
                {{$about->title}}  
                @break 
             @empty
@@ -32,20 +32,21 @@
               <ul>
                 <li><i class="bi bi-chevron-right"></i> <strong>Education:</strong> <span>Computer Engineering</span></li>
                 <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>B.Eng</span></li>
-                @forelse ($abouts as $about)
+                @forelse ($contacts as $contact)
                   <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span> 
-                    @foreach (json_decode($about->phone) as $phone)
+                    {{-- @foreach (json_decode($about->phone) as $phone)
                       {{$phone}} || 
-                    @endforeach
+                    @endforeach --}}
+                    {{ $contact->phone }}
                   </span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>{{$about->city}}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>{{$contact->city}}</span></li>
                 @break
                 @empty
                  No Data Found!   
                 @endforelse
                 <li><i class="bi bi-chevron-right"></i> <strong>Mail:</strong> <span>nicholasmt09@gmail.com</span></li>
-                @forelse ($abouts as $about)
-                <li><i class="bi bi-chevron-right"></i> <strong>Address:</strong> <span>{{$about->address}}</span></li>
+                @forelse ($contacts as $contact)
+                <li><i class="bi bi-chevron-right"></i> <strong>Address:</strong> <span>{{$contact->address}}</span></li>
                 @break 
                 @empty
                 No Data Found!   

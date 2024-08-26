@@ -12,8 +12,8 @@
           <li><a class="nav-link" href="{{ route('about')}}">About</a></li>
           <li><a class="nav-link" href="{{ route('resume')}}">Resume</a></li>
           <li><a class="nav-link" href="{{ route('services')}}">Services</a></li>
-          <li><a class="nav-link" href="{{ route('portfolio')}}">Portfolio</a></li>
-          <li><a class="nav-link" href="{{ route('contact')}}">Contact</a></li>
+          <li><a class="nav-link" href="{{ route('projects')}}">Projects</a></li>
+          <li><a class="nav-link" href="{{ route('blog')}}">Blog</a></li>
           @if (auth()->check())
             <li><a class="btn btn-primary" href="{{ url('admin')}}">Dashboard</a></li>  
           @endif

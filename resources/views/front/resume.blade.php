@@ -19,21 +19,22 @@
           <h3 class="resume-title">Sumary</h3>
           <div class="resume-item pb-0">
             <h4>Nicholas Tochukwu</h4>
-            @forelse ($abouts as $about)
+            @forelse ($contacts as $contact)
             <p>
-              <em>{{$about->title}} </em></p>
+              <em>{{$contact->title}} </em></p>
             <p>
              @break     
             @empty
             No Data Found!
             @endforelse
             <ul>
-              @forelse ($about as $abot)
-              <li>{{$about->address}}</li>
+              @forelse ($contacts as $contact)
+              <li>{{$contact->address}}</li>
               <li>
-                @foreach (json_decode($about->phone) as $phone)
+                {{-- @foreach (json_decode($contact->phone) as $phone)
                   {{$phone}} ||
-                @endforeach
+                @endforeach --}}
+                {{ $contact->phone }}
               </li>
               @break    
               @empty

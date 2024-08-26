@@ -5,7 +5,7 @@
 <section id="portfolio" class="portfolio section-show">
     <div class="container">
       <div class="section-title">
-        <h2>Portfolio</h2>
+        <h2>Projects</h2>
         <p>My Works</p>
       </div>
 
@@ -23,7 +23,7 @@
       </div>
 
       <div class="row portfolio-container">
-        @forelse ($works as $work)
+        @forelse ($projects as $work)
          <div class="col-lg-4 col-md-6 portfolio-item fliter-{{$work->service->title}}">
           <div class="portfolio-wrap">
             @if(!empty($work->photo))

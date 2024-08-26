@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('url');
             $table->string('icon');
+            $table->boolean('active')->default(0);
             $table->timestamps();
         });
     }
