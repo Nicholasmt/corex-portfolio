@@ -7,7 +7,7 @@
     <div class="container">
 
       <div class="section-title">
-        <h2>Contact</h2>
+        <h2>Hire Me</h2>
         <p>Contact Me</p>
       </div>
 
@@ -17,12 +17,9 @@
           <div class="info-box">
             <i class="bx bx-map"></i>
             <h3>My Address</h3>
-            @forelse ($abouts as $about)
-              <p>{{$about->address}}</p>
-              @break
-             @empty
-              No Data Found!  
-            @endforelse
+            @if (!empty($contact))
+              <p>{{$contact->address}}</p>
+           @endif
           </div>
         </div>
 
@@ -45,30 +42,28 @@
           <div class="info-box">
             <i class="bx bx-envelope"></i>
             <h3>Email Me</h3>
-            <p>nicholasmt09@gmail.com</p>
+            <p> <a href="mailto:nicholasmt09@gmail.com" class=""> nicholasmt09@gmail.com </a></p>
           </div>
         </div>
         <div class="col-md-6 mt-4 d-flex align-items-stretch">
           <div class="info-box">
             <i class="bx bx-phone-call"></i>
             <h3>Call Me</h3>
-            @forelse ($abouts as $about)
+            @if(!empty($contact))
              <p> 
-              @foreach (json_decode($about->phone) as $phone)
+              {{-- @foreach (json_decode($about->phone) as $phone)
                  {{$phone}} ||
-              @endforeach
+              @endforeach --}}
+              {{ $contact->phone }}
              </p>
-            @break
-           @empty
-            No Data Found!  
-          @endforelse
+           @endif
           </div>
         </div>
       </div>
 
       @livewireStyles
 
-      <livewire:contact/>
+      <livewire:contact-me/>
 
       </div>
   </section>

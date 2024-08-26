@@ -18,6 +18,9 @@ return new class extends Migration
             $table->longText('title');
             $table->string('phone');
             $table->string('city');
+            $table->string('contact_email');
+            $table->string('contact_name');
+            $table->string('dev_stack');
             $table->string('address');
             $table->timestamps();
         });

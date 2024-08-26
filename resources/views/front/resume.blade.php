@@ -9,38 +9,33 @@
 
       <div class="section-title">
         <h2>Resume</h2>
-        @if (Session::get('authentication') == true)
-        <a href="{{ route('admin-print')}}" class="btn btn-light float-end"> Print</a>
+        @if (auth()->check())
+         <a href="{{ route('download-resume')}}" class="btn btn-light float-end"> Print</a>
         @endif
         <p>Check My Resume</p>
       </div>
      <div class="row">
         <div class="col-lg-6">
+          <a href="{{ route('hire-me')}}" class="btn btn-primary float-end"> Hire Me</a>
           <h3 class="resume-title">Sumary</h3>
           <div class="resume-item pb-0">
             <h4>Nicholas Tochukwu</h4>
-            @forelse ($contacts as $contact)
-            <p>
-              <em>{{$contact->title}} </em></p>
-            <p>
-             @break     
-            @empty
-            No Data Found!
-            @endforelse
+            @if (!empty($contact))
+              <p>
+                <em>{{$contact->title}} </em></p>
+              <p>
+             @endif
             <ul>
-              @forelse ($contacts as $contact)
-              <li>{{$contact->address}}</li>
-              <li>
-                {{-- @foreach (json_decode($contact->phone) as $phone)
-                  {{$phone}} ||
-                @endforeach --}}
-                {{ $contact->phone }}
-              </li>
-              @break    
-              @empty
-              No Data Found!   
-              @endforelse
-              <li>nicholasmt09@gmail.com</li>
+              @if (!empty($contact))
+                <li>{{$contact->address}}</li>
+                <li>
+                  {{-- @foreach (json_decode($contact->phone) as $phone)
+                    {{$phone}} ||
+                  @endforeach --}}
+                  {{ $contact->phone }}
+                </li>
+                <li> <a href="mailto:nicholasmt09@gmail.com" class="">nicholasmt09@gmail.com</a></li>
+              @endif
             </ul>
             </p>
           </div>
@@ -61,7 +56,6 @@
         {{-- Experiences Start --}}
 
         <div class="col-lg-6">
-
           <div id="portfolio" class="portfolio">
              <div class="row">
               <div class="col-lg-12 d-flex justify-content-center">

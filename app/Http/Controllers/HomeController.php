@@ -21,20 +21,21 @@ class HomeController extends Controller
 
     public function about()
     {
-        $contacts = Contact::get();
+        $contact = Contact::first();
         $socials = Social::where('active',1)->get();
         $skills = Skill::where('active',1)->get();
+        return view('front.about',compact('socials','contact','skills'));
 
-        return view('front.about',compact('socials','contacts','skills'));
     }
 
     public function resume()
     {
-        $contacts = Contact::get();
+        $contact = Contact::first();
         $educations = Education::get();
         $experiences = Experience::get();
         $services = Service::get();
-        return view('front.resume',compact('experiences','contacts','educations','services'));
+        return view('front.resume',compact('experiences','contact','educations','services'));
+
     }
 
     public function services()
@@ -55,6 +56,13 @@ class HomeController extends Controller
         $services = Service::get();
         $projects = Project::get();
         return view('front.blog',compact('projects','services'));
+    }
+
+    public function contact_me()
+    {
+        $contact = Contact::first();
+        $socials = Social::where('active',1)->get();
+        return view('front.hire-me',compact('contact','socials'));
     }
 
 }
