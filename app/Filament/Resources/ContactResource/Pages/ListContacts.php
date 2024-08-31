@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\ContactResource\Pages;
 
-use App\Filament\Resources\ContactResource;
 use Filament\Actions;
+use App\Models\Contact;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\Resources\ContactResource;
 
 class ListContacts extends ListRecords
 {
@@ -12,8 +13,17 @@ class ListContacts extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        return [
-            Actions\CreateAction::make(),
-        ];
+        $contact = Contact::get()->count();
+        if($contact > 0)
+        {  
+            return [];
+           
+        }else{
+            return [
+                Actions\CreateAction::make(),
+            ];
+          
+        }
+            
     }
 }

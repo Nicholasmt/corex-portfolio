@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\RichEditor;
@@ -32,11 +33,14 @@ class BlogResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('title')->required(),
-                RichEditor::make('content')->required(),
-                TextInput::make('author')->required(),
-                Toggle::make('active'),
-            ]);
+                Section::make('Blogs')
+                        ->schema([
+                            TextInput::make('title')->required(),
+                            RichEditor::make('content')->required(),
+                            TextInput::make('author')->required(),
+                            Toggle::make('active'),
+                        ])->collapsible(),
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table

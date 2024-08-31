@@ -28,7 +28,9 @@ class ContactResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('title')->required(),
+                TextInput::make('name')->label('Name')->required(),
+                TextInput::make('email')->label('Email')->required(),
+                TextInput::make('descrption')->required(),
                 TextInput::make('phone')->required(),
                 TextInput::make('city')->required(),
                 Textarea::make('address')->required(),
