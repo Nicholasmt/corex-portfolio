@@ -9,4 +9,15 @@ class Experience extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
+    public function experience()
+    {
+        return $this->belongsTo(Experience::class);
+    }
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
 }

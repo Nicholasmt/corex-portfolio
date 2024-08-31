@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Service;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -15,11 +16,12 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_id')->constrained('services')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('image_id');
+            $table->foreignIdFor(Service::class)->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('name');
+            $table->json('image_id')->nullable();
             $table->string('description');
-            $table->string('url');
-            $table->string('client')->nullable();
+            $table->string('url')->nullable();
+            $table->boolean('completed')->default(0);
             $table->timestamps();
         });
     }

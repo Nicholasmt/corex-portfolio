@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Service;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -15,21 +16,16 @@ return new class extends Migration
     {
         Schema::create('experiences', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('service_id')->unsigned();
+            $table->foreignIdFor(Service::class)->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('title');
             $table->string('organization');
             $table->string('city');
             $table->string('location');
             $table->longText('description');
-            $table->string('start_year');
-            $table->string('end_year');
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
+            $table->boolean('present')->default(0);
             $table->timestamps();
-
-            $table->foreign('service_id')
-            ->references('id')
-            ->on('services')
-            ->onDelete('cascade');
-
         });
     }
 

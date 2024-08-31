@@ -2,36 +2,28 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\BlogResource\Pages;
+use App\Filament\Resources\BlogResource\RelationManagers;
+use App\Models\Blog;
 use Filament\Forms;
-use Filament\Tables;
-use App\Models\Skill;
 use Filament\Forms\Form;
-use Filament\Tables\Table;
 use Filament\Resources\Resource;
-use Filament\Forms\Components\Toggle;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\SkillResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\SkillResource\RelationManagers;
 
-class SkillResource extends Resource
+class BlogResource extends Resource
 {
-    protected static ?string $model = Skill::class;
+    protected static ?string $model = Blog::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Portfolio Configurtaions';
-    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('title')->required(),
-                TextInput::make('level')->required(),
-                Toggle::make('active'),
+                //
             ]);
     }
 
@@ -39,9 +31,7 @@ class SkillResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title')->sortable(),
-                TextColumn::make('level')->searchable(),
-                ToggleColumn::make('active')->sortable(),
+                //
             ])
             ->filters([
                 //
@@ -66,9 +56,9 @@ class SkillResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSkills::route('/'),
-            'create' => Pages\CreateSkill::route('/create'),
-            'edit' => Pages\EditSkill::route('/{record}/edit'),
+            'index' => Pages\ListBlogs::route('/'),
+            'create' => Pages\CreateBlog::route('/create'),
+            'edit' => Pages\EditBlog::route('/{record}/edit'),
         ];
     }
 }
