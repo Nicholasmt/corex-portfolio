@@ -2,16 +2,19 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Forms;
+use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use App\Models\GeneralSetting;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\ColorPicker;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\GeneralSettingResource\Pages;
 use App\Filament\Resources\GeneralSettingResource\RelationManagers;
-use App\Models\GeneralSetting;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class GeneralSettingResource extends Resource
 {
@@ -25,7 +28,11 @@ class GeneralSettingResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('full_name')->label('Full Name')->required(),
+                TextInput::make('position')->label('Position Title')->required(),
+                ColorPicker::make('primary_color')->required(),
+                ColorPicker::make('secondary_color')->required(),
+                // TextInput::make('descrption')->required(),
             ]);
     }
 

@@ -30,7 +30,7 @@ class ContactResource extends Resource
             ->schema([
                 TextInput::make('name')->label('Name')->required(),
                 TextInput::make('email')->label('Email')->required(),
-                TextInput::make('descrption')->required(),
+                Textarea::make('descrption')->required(),
                 TextInput::make('phone')->required(),
                 TextInput::make('city')->required(),
                 Textarea::make('address')->required(),
