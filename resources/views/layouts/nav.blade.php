@@ -1,8 +1,8 @@
 <header id="header" class="header-top">
     <div class="container">
-    <h1><a href="index.html">Nicholas Tochukwu</a></h1>
+    <h1><a href="{{ route('index') }}" class="text-capitalize"> @if(!empty($setting)) {{ $setting->full_name }}  @else  MY Name here  @endif</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
-      <a href="index.html" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+      <a href="{{ route('index') }}" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
        <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link" href="{{ route('index')}}">Home</a></li>

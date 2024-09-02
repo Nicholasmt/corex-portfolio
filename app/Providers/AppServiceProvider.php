@@ -22,8 +22,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('*', function ($view) {
-            $settings = GeneralSetting::first();
-            $view->with(['active_projects'=>$settings]);
+            $setting = GeneralSetting::first();
+            $view->with(['active_projects'=>$setting]);
         });
     }
 }

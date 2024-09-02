@@ -2,10 +2,10 @@
 @section('contents')
   <header id="header">
     <div class="container">
-    <h1><a href="{{ route('index') }}">Nicholas Tochukwu</a></h1>
+    <h1><a href="{{ route('index') }}" class="text-capitalize"> @if(!empty($setting)) {{ $setting->full_name }} @else MY name here @endif </a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
-      <h2>I'm a self motivated <span> Software Developer / 3D Designer</span> from Nigeria</h2>
+      <h2> @if(!empty($setting)) {{ $setting->bio  }} @else MY Introduction message Here @endif <span>  @if(!empty($setting)) {{ $setting->profession  }} @else My Skill Profession Here @endif </span></h2>
        <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link active" href="{{ route('index')}}">Home</a></li>

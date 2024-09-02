@@ -4,35 +4,33 @@ namespace App\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Tables;
+use App\Models\Interest;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use App\Models\GeneralSetting;
 use Filament\Resources\Resource;
-use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\ColorPicker;
+use App\Filament\Resources\InterestResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\GeneralSettingResource\Pages;
-use App\Filament\Resources\GeneralSettingResource\RelationManagers;
+use App\Filament\Resources\InterestResource\RelationManagers;
 
-class GeneralSettingResource extends Resource
+class InterestResource extends Resource
 {
-    protected static ?string $model = GeneralSetting::class;
+    protected static ?string $model = Interest::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-cog';
-    protected static ?string $navigationGroup = 'Site Configurations';
-    protected static ?int $navigationSort = 1;
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Portfolio Configurtaions';
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('full_name')->label('Full Name')->required(),
-                TextInput::make('profession')->label('Skill Profession')->required(),
-                ColorPicker::make('primary_color')->required(),
-                ColorPicker::make('secondary_color')->required(),
-                TextInput::make('bio')->label('Introduction Message')->required(),
+                TextInput::make('name')->required(),
+                TextInput::make('icon')->label('RI Icon')->required(),
+                ColorPicker::make('color')->required(),
             ]);
     }
 
@@ -40,7 +38,7 @@ class GeneralSettingResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name')->sortable()->searchable(),
             ])
             ->filters([
                 //
@@ -65,9 +63,9 @@ class GeneralSettingResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListGeneralSettings::route('/'),
-            'create' => Pages\CreateGeneralSetting::route('/create'),
-            'edit' => Pages\EditGeneralSetting::route('/{record}/edit'),
+            'index' => Pages\ListInterests::route('/'),
+            'create' => Pages\CreateInterest::route('/create'),
+            'edit' => Pages\EditInterest::route('/{record}/edit'),
         ];
     }
 }

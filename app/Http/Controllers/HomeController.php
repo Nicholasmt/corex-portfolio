@@ -22,9 +22,10 @@ class HomeController extends Controller
     public function about()
     {
         $contact = Contact::first();
+        $qualifications = Education::get();
         $socials = Social::where('active',1)->get();
         $skills = Skill::where('active',1)->get();
-        return view('front.about',compact('socials','contact','skills'));
+        return view('front.about',compact('socials','contact','skills','qualifications'));
 
     }
 

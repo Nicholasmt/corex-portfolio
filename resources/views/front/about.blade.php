@@ -18,17 +18,27 @@
           <img src="assets/img/me.png" class="img-fluid" alt="">
         </div>
         <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-          <h3>Software Developer &amp; 3D Designer</h3>
+          <h3> @if(!empty($setting)) {{ $setting->profession }} @else My Skill Profession Here @endif</h3>
           <p class="fst-italic">
-            @if (!empty($contact))
-               {{$contact->title}}  
+            @if (!empty($setting))
+               {{$setting->bio}}  
+            @else
+               MY Introduction Message here.
             @endif
-          </p>
+           </p>
           <div class="row">
             <div class="col-lg-6">
               <ul>
-                <li><i class="bi bi-chevron-right"></i> <strong>Education:</strong> <span>Computer Engineering</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>B.Eng</span></li>
+
+                @forelse($qualifications as $qualification)
+                  <p class="">{{ $qualification->institution }}</p>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Education:</strong> <span>Computer Engineering</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>B.Eng</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Start Date:</strong> <span>B.Eng</span></li>
+                @empty
+                   No Qualifications Found!
+                @endforelse
+
                 @if (!empty($contact))
                   <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span> 
                     {{-- @foreach (json_decode($about->phone) as $phone)
@@ -122,7 +132,7 @@
           </div>
         </div>
         @empty
-          No Data Found!  
+          No Skills Found!  
         @endforelse
      {{-- 
         <div class="col-lg-6">
@@ -155,7 +165,7 @@
             <h3>graphics Designs</h3>
           </div>
         </div>
-        <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+        {{-- <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
           <div class="icon-box">
             <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
             <h3>Game Developments</h3>
@@ -171,7 +181,7 @@
           <div class="icon-box">
             <i class="ri-paint-brush-line" style="color: #e361ff;"></i>
             <h3>3D Modelling</h3>
-          </div>
+          </div> --}}
        
       </div>
 

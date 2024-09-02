@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('general_settings', function (Blueprint $table) {
             $table->id();
             $table->string('full_name');
-            $table->string('position');
+            $table->string('profession');
+            $table->longText('bio');
             $table->string('primary_color');
             $table->string('secondary_color');
             $table->string('background_image')->nullable();
+            $table->string('passport')->nullable();
             $table->string('logo')->nullable();
             $table->string('favicon')->nullable();
             $table->timestamps();
