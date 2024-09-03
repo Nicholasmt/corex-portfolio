@@ -6,6 +6,7 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
+use App\Models\GeneralSetting;
 use Filament\Support\Colors\Color;
 use App\Filament\Widgets\VisitSite;
 use Filament\Http\Middleware\Authenticate;
@@ -21,17 +22,19 @@ use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 
 class AdminPanelProvider extends PanelProvider
 {
-    
+     
     public function panel(Panel $panel): Panel
     {
+        $setting = GeneralSetting::first();
+        // dd($setting);
         return $panel
             ->default()
             ->id('admin')
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => '#d52122',
-                'secondary' => '#18181b',
+                'primary' => !empty($setting) ?  $setting->primary_color : '#d52122',
+                'secondary' => !empty($setting) ?  $setting->primary_color : '#18181b',
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

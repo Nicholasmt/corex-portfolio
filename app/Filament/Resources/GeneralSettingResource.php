@@ -9,6 +9,7 @@ use Filament\Tables\Table;
 use App\Models\GeneralSetting;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\ColorPicker;
@@ -32,7 +33,7 @@ class GeneralSettingResource extends Resource
                 TextInput::make('profession')->label('Skill Profession')->required(),
                 ColorPicker::make('primary_color')->required(),
                 ColorPicker::make('secondary_color')->required(),
-                TextInput::make('bio')->label('Introduction Message')->required(),
+                Textarea::make('bio')->label('Introduction Message')->required(),
             ]);
     }
 
@@ -40,7 +41,8 @@ class GeneralSettingResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('full_name')->searchable(),
+                TextColumn::make('profession')->searchable(),
             ])
             ->filters([
                 //
