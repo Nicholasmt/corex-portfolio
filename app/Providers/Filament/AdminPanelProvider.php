@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use Filament\Pages;
 use Filament\Panel;
+use App\Models\Media;
 use Filament\Widgets;
 use Filament\PanelProvider;
 use App\Models\GeneralSetting;
@@ -27,6 +28,13 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         $color_setting = GeneralSetting::first();
+        if(!empty($color_setting)){
+            $media = Media::where('id',$color_setting->favicon)->first();
+             $favicon = 'storage/'.$media->path;
+        }else{
+            $favicon = 'assets/imgs/sample-favicon.png';
+        }
+       
         return $panel
             ->default()
             ->id('admin')
@@ -77,6 +85,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(fn () => view('filament.logo'))
              ->brandLogoHeight('3rem')
              ->profile()
-             ->favicon(asset('assets/img/favicon.png'));
+             ->favicon(asset($favicon));
+              
     }
 }

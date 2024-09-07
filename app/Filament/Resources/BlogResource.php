@@ -16,6 +16,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\BlogResource\Pages;
+use Awcodes\Curator\Components\Forms\CuratorPicker;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\BlogResource\RelationManagers;
 use App\Filament\Resources\BlogResource\RelationManagers\CommentsRelationManager;
@@ -37,6 +38,7 @@ class BlogResource extends Resource
                         ->schema([
                             TextInput::make('title')->required(),
                             RichEditor::make('content')->required(),
+                            CuratorPicker::make('image')->required(),
                             TextInput::make('author')->required(),
                             Toggle::make('active'),
                         ])->collapsible(),

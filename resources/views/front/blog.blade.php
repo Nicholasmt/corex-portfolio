@@ -8,7 +8,7 @@
 
       <div class="section-title">
         <h2>blog</h2>
-        {{-- <p>Contact Me</p> --}}
+        <p>MY Articles</p>
       </div>
 
       <div class="row mt-2">
@@ -16,16 +16,18 @@
         <div class="col-md-6 d-flex align-items-stretch">
           <div class="info-box">
             <div class="text-center">
-              <x-curator-glider
-              class="img-fluid"
-              :media="$blog->image"
-              alt="img"
-              width="200" 
-              height="170"
-            />
-            </div>
-              <p class="fw-bold">{{ $blog->title }}</p> <br>
-              <span>{{\Carbon\Carbon::parse($blog->created_at )->format('M d, Y')}}</span>
+              <a href="#">
+                <x-curator-glider
+                  class="img-fluid"
+                  :media="$blog->image"
+                  alt="img"
+                  width="400" 
+                  height="300"
+                />
+              <p class="fw-bold text-start mt-2">{{ $blog->title }}</p> 
+            </a>
+            <span>{{\Carbon\Carbon::parse($blog->created_at )->format('M d, Y')}}</span>
+          </div>
           </div>
         </div>
       @empty
@@ -35,19 +37,14 @@
    </div>
   </section>
   <!-- End Contact Section -->
+  @if(!empty($setting))
+  <style>
+     .info-box p{
+        color: <?php echo $setting->primary_color ?> !important;
+     }
+   </style>
+ @endif
  @endsection
  
-@section('script')
-
-@livewireScripts
-    @stack('scripts')
-    <script>
-      $(document).ready(function(){
-        window.livewire.on('alert_remove',()=>{
-          setTimeout(function(){ $(".alert-success").fadeOut('fast');
-          }, 3000);
-        });
-    });
-</script>
-@endsection
+ 
 
