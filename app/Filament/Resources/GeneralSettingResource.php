@@ -13,6 +13,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\ColorPicker;
+use Awcodes\Curator\Components\Forms\CuratorPicker;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\GeneralSettingResource\Pages;
 use App\Filament\Resources\GeneralSettingResource\RelationManagers;
@@ -33,6 +34,10 @@ class GeneralSettingResource extends Resource
                 TextInput::make('profession')->label('Skill Profession')->required(),
                 ColorPicker::make('primary_color')->required(),
                 ColorPicker::make('secondary_color')->required(),
+                CuratorPicker::make('logo'),
+                CuratorPicker::make('background_image'), 
+                CuratorPicker::make('passport'),
+                CuratorPicker::make('favicon'),
                 Textarea::make('bio')->label('Introduction Message')->required(),
             ]);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Skill;
 use App\Models\Social;
 use App\Models\Contact;
@@ -54,9 +55,8 @@ class HomeController extends Controller
 
     public function blog()
     {
-        $services = Service::get();
-        $projects = Project::get();
-        return view('front.blog',compact('projects','services'));
+       $blogs = Blog::get();
+        return view('front.blog',compact('blogs'));
     }
 
     public function contact_me()

@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer('*', function ($view) {
             $setting = GeneralSetting::first();
-            $view->with(['active_projects'=>$setting]);
+            $view->with(['setting'=>$setting]);
         });
     }
 }

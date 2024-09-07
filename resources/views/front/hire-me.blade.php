@@ -82,5 +82,36 @@
         });
     });
 </script>
+
+@if(!empty($setting))
+  @php
+    $mycolor_1 = App\Services\Hex2Rgb::hex2rgba($setting->primary_color,0.6);
+    $mycolor_2 = App\Services\Hex2Rgb::hex2rgba($setting->primary_color,0.8);
+  @endphp
+   <style>
+     .btn-primary {
+      --bs-btn-color: #fff;
+      --bs-btn-bg: <?php echo $setting->primary_color ?> !important;
+      --bs-btn-border-color: <?php echo $setting->primary_color ?> !important;
+      --bs-btn-hover-color: #fff;
+      --bs-btn-hover-bg: <?php echo $mycolor_1 ?> !important;
+      --bs-btn-hover-border-color: <?php echo $mycolor_1 ?> !important;
+      --bs-btn-focus-shadow-rgb: 49, 132, 253;
+      --bs-btn-active-color: #fff;
+      --bs-btn-active-bg: <?php echo $mycolor_2 ?> !important;
+      --bs-btn-active-border-color: <?php echo $mycolor_2 ?> !important;
+      --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+      --bs-btn-disabled-color: #fff;
+      --bs-btn-disabled-bg: <?php echo $setting->secondary_color ?> !important;
+      --bs-btn-disabled-border-color: <?php echo $setting->secondary_color ?> !important;
+     }
+     .contact .info-box i.bx {
+        color: <?php echo $setting->primary_color ?> !important;
+     }
+     .info-box a{
+        color: <?php echo $setting->primary_color ?> !important;
+     }
+   </style>
+ @endif
 @endsection
 

@@ -7,41 +7,30 @@
     <div class="container">
 
       <div class="section-title">
-        <h2>Contact</h2>
-        <p>Contact Me</p>
+        <h2>blog</h2>
+        {{-- <p>Contact Me</p> --}}
       </div>
 
       <div class="row mt-2">
-
+       @forelse($blogs as $blog)
         <div class="col-md-6 d-flex align-items-stretch">
           <div class="info-box">
-            <i class="bx bx-map"></i>
-            <h3>My Address</h3>
-            {{-- @forelse ($abouts as $about) --}}
-              {{-- <p>{{$about->address}}</p> --}}
-              {{-- @break --}}
-             {{-- @empty
-              No Data Found!  
-            @endforelse --}}
+            <div class="text-center">
+              <x-curator-glider
+              class="img-fluid"
+              :media="$blog->image"
+              alt="img"
+              width="200" 
+              height="170"
+            />
+            </div>
+              <p class="fw-bold">{{ $blog->title }}</p> <br>
+              <span>{{\Carbon\Carbon::parse($blog->created_at )->format('M d, Y')}}</span>
           </div>
         </div>
-
-        <div class="col-md-6 mt-4 mt-md-0 d-flex align-items-stretch">
-          <div class="info-box">
-            <i class="bx bx-share-alt"></i>
-            <h3>Social Profiles</h3>
-            <div class="social-links">
-                {{-- @forelse ($socials as $social)
-                  <a href="{{$social->url}}" class="twitter"><i class="{{$social->icon}}"></i></a>
-                 @empty
-                 No Data Found!  
-                @endforelse --}}
-                
-           </div>
-          </div>
-        </div>
- 
-         
+      @empty
+       <p class="text-center fw-bold">No Data Found!</p>
+      @endforelse
       </div>
    </div>
   </section>
