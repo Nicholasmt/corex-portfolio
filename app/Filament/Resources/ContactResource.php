@@ -39,7 +39,7 @@ class ContactResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title')->sortable(),
+                TextColumn::make('email')->sortable(),
                 TextColumn::make('phone')->searchable(),
                 TextColumn::make('city')->sortable(),
             ])

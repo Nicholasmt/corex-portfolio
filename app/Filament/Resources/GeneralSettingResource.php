@@ -26,7 +26,7 @@ class GeneralSettingResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-cog';
     protected static ?string $navigationGroup = 'Site Configurations';
     protected static ?int $navigationSort = 1;
-
+   
     public static function form(Form $form): Form
     {
         return $form
@@ -52,7 +52,7 @@ class GeneralSettingResource extends Resource
                                  }
                               }),  
                     TextInput::make('font_family')
-                              ->required()
+                             ->required()
                              ->visible(function(callable $get){
                                 if($get('font_name')) {
                                 return true;
