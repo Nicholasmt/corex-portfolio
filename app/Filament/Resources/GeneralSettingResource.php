@@ -8,6 +8,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use App\Models\GeneralSetting;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
@@ -30,15 +31,34 @@ class GeneralSettingResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('full_name')->label('Full Name')->required(),
-                TextInput::make('profession')->label('Skill Profession')->required(),
-                ColorPicker::make('primary_color')->required(),
-                ColorPicker::make('secondary_color')->required(),
-                CuratorPicker::make('logo'),
-                CuratorPicker::make('background_image'), 
-                CuratorPicker::make('passport'),
-                CuratorPicker::make('favicon'),
-                Textarea::make('bio')->label('Introduction Message')->required(),
+                Section::make('Basic Settings')->schema([
+                    TextInput::make('full_name')->label('Full Name')->required(),
+                    TextInput::make('profession')->label('Skill Profession')->required(),
+                    ColorPicker::make('primary_color')->required(),
+                    ColorPicker::make('secondary_color')->required(),
+                    Textarea::make('bio')->label('Introduction Message')->required(),
+                    CuratorPicker::make('logo'),
+                    CuratorPicker::make('background_image'), 
+                    CuratorPicker::make('passport'),
+                    CuratorPicker::make('favicon'),
+                ])->columns(2)->collapsible(),
+                Section::make('Font Settings')->schema([
+                    TextInput::make('font_name')->live(), 
+                    TextInput::make('font_url')
+                              ->required()
+                              ->visible(function(callable $get){
+                                 if($get('font_name')) {
+                                    return true;
+                                 }
+                              }),  
+                    TextInput::make('font_family')
+                              ->required()
+                             ->visible(function(callable $get){
+                                if($get('font_name')) {
+                                return true;
+                                }
+                            }),     
+                ])->columns(2)->collapsible(),
             ]);
     }
 

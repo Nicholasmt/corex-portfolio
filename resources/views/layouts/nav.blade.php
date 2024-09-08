@@ -35,7 +35,7 @@
  
   @if(!empty($setting))
    
-  <style>
+   <style>
       .navbar a:before{
         background-color: <?php echo $setting->primary_color ?> !important;
       } 
@@ -69,6 +69,7 @@
      .resume .resume-item h4{
       color: <?php echo $setting->primary_color ?> !important;
      }
+
   
   </style>
  @endif

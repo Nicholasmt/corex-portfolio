@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('passport')->nullable();
             $table->string('logo')->nullable();
             $table->string('favicon')->nullable();
+            $table->string('font_name')->nullable();
+            $table->string('font_url')->nullable();
+            $table->string('font_family')->nullable();
             $table->timestamps();
         });
     }

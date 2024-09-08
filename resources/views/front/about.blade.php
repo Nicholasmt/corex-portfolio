@@ -15,7 +15,17 @@
 
       <div class="row">
         <div class="col-lg-4" data-aos="fade-right">
-          <img src="assets/img/me.png" class="img-fluid" alt="">
+          @if(!empty($setting))
+            <x-curator-glider
+              class="img-fluid"
+              :media="$setting->passport"
+              alt="my-picture"
+              width="403" 
+              height="403"
+            /> 
+          @else
+             <img src="{{ asset('assets/imgs/me.png') }}" class="img-fluid" height="403" width="403" alt="sample picture">
+          @endif
         </div>
         <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
           <h3> @if(!empty($setting)) {{ $setting->profession }} @else My Skill Profession Here @endif</h3>
