@@ -65,7 +65,7 @@ class ServiceResource extends Resource
     {
         return [
             ExperiencesRelationManager::class,
-            ProjectsRelationManager::class,
+            // ProjectsRelationManager::class,
         ];
     }
 

@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('full_name');
             $table->string('profession');
             $table->longText('bio');
-            $table->string('primary_color');
-            $table->string('secondary_color');
+            $table->string('primary_color')->nullable();
+            $table->string('secondary_color')->nullable();
             $table->string('background_image')->nullable();
             $table->string('passport')->nullable();
             $table->string('logo')->nullable();

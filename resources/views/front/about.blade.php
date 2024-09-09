@@ -41,14 +41,14 @@
               <ul>
 
                 @forelse($qualifications as $qualification)
-                  <p class="">{{ $qualification->institution }}</p>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Education:</strong> <span>Computer Engineering</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>B.Eng</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Start Date:</strong> <span>B.Eng</span></li>
+                  {{-- <p class="">{{ $qualification->institution }}</p> --}}
+                  <li><i class="bi bi-chevron-right"></i> <strong>Program:</strong> <span>{{ $qualification->title }}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>{{ $qualification->degree }}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Year:</strong><span> {{\Carbon\Carbon::parse($qualification->start_date )->format('Y')}}  -  @if($qualification->present == true) Present @else {{\Carbon\Carbon::parse($qualification->end_date )->format('Y')}} @endif </span></li>
                 @empty
                    No Qualifications Found!
                 @endforelse
-
+ 
                 @if (!empty($contact))
                   <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span> 
                     {{-- @foreach (json_decode($about->phone) as $phone)
@@ -57,7 +57,7 @@
                     {{ $contact->phone }}
                   </span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>{{$contact->city}}</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Mail:</strong> <span> <a href="mailto:nicholasmt09@gmail.com" class="">nicholasmt09@gmail.com</a></span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Mail:</strong> <span class="text-url"> <a href="mailto:{{ $contact->email }}" class="">{{ $contact->email }}</a></span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>Address:</strong> <span>{{$contact->address}}</span></li>
                @endif
               </ul>
@@ -65,9 +65,8 @@
             <div class="col-lg-6">
               <ul>
                 @forelse ($socials as $social)
-                  <li><i class="bi bi-chevron-right"></i> <strong>{{$social->title}}:</strong> <span> {{$social->url}} </span></li>
-                  {{-- <li><i class="bi bi-chevron-right"></i> <strong>Github:</strong> <span> https://github.com/Nicholasmt</span></li> --}}
-                  @empty
+                  <li class="text-url"><i class="bi bi-chevron-right"></i> <strong>{{$social->title}}:</strong> <span> <a href="{{$social->url}}" class="">visit</a>  </span></li>
+                @empty
                   No Data Found!
                 @endforelse
                
@@ -144,37 +143,25 @@
         @empty
           No Skills Found!  
         @endforelse
-     {{-- 
-        <div class="col-lg-6">
- 
-
-          <div class="progress">
-            <span class="skill">Blender <i class="val">65%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-
-        </div> --}}
-
-      </div>
-
-    </div><!-- End Skills -->
+    </div>
+  </div><!-- End Skills -->
 
     <!-- ======= Interests ======= -->
     <div class="interests container">
-
-      <div class="section-title">
+     <div class="section-title">
         <h2>Interests</h2>
       </div>
-
-      <div class="row">
+     <div class="row">
+      @forelse($interests as $interest)
         <div class="col-lg-3 col-md-4">
           <div class="icon-box">
-            <i class="ri-store-line" style="color: #ffbb2c;"></i>
-            <h3>graphics Designs</h3>
+            <i class={{$interest->icon}} style="color:{{$interest->color}}"></i>
+            <h3>{{ $interest->name }}</h3>
           </div>
         </div>
+      @empty
+           <p class="">No Data Found!</p>
+      @endforelse
         {{-- <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
           <div class="icon-box">
             <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
@@ -280,7 +267,19 @@
 
       </div>
 
-    </div><!-- End Testimonials  --> --}}
+      </div><!-- End Testimonials  --> --}}
+
+      @if(!empty($setting))
+        <style>
+         .text-url a{
+            color: <?php echo $setting->primary_color ?> !important;
+        }
+        .skills .progress-bar{
+          background: <?php echo $setting->primary_color ?> !important;
+          color: <?php echo $setting->primary_color ?> !important;
+        }
+      </style>
+    @endif
 
   </section><!-- End About Section -->
 @endsection

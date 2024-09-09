@@ -13,4 +13,5 @@ Route::get('services', [HomeController::class,'services'])->name('services');
 Route::get('projects', [HomeController::class,'projects'])->name('projects');
 Route::get('hire-me', [HomeController::class,'contact_me'])->name('hire-me');
 Route::get('blog', [HomeController::class,'blog'])->name('blog');
+Route::get('view/project/{id}', [HomeController::class,'view_project'])->name('view-project');
 Route::get('download-resume', [HomeController::class,'download_resume'])->name('download-resume');

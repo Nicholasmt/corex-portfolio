@@ -10,7 +10,7 @@
       <div class="section-title">
         <h2>Resume</h2>
         @if (auth()->check())
-         <a href="{{ route('download-resume')}}" class="btn btn-light float-end"> Print</a>
+         <a href="{{ route('download-resume')}}" class="btn btn-light float-end"> Print </a>
         @endif
         <p>Check My Resume</p>
       </div>
@@ -34,7 +34,7 @@
                   @endforeach --}}
                   {{ $contact->phone }}
                 </li>
-                <li> <a href="mailto:nicholasmt09@gmail.com" class="">nicholasmt09@gmail.com</a></li>
+                <li class="text-url"> <a href="mailto:{{ $contact->email }}" class="">{{ $contact->email }}</a></li>
               @endif
             </ul>
             </p>
@@ -44,8 +44,8 @@
            @forelse ($educations as $education)
             <div class="resume-item">
               <h4>{{$education->title}}</h4>
-              <h5>{{$education->started." - ".$education->graduated}}</h5>
               <p><em>{{$education->institution}}</em></p>
+              <h5>{{\Carbon\Carbon::parse($education->start_date )->format('M, Y')}} - @if($education->present == true) Present @else {{\Carbon\Carbon::parse($education->end_date )->format('M, Y')}} @endif</h5>
               <p>{{$education->description}}</p>
             </div>
           @empty
@@ -55,9 +55,9 @@
 
         {{-- Experiences Start --}}
          
-        <div class="col-lg-6">
+        <div class="col-lg-6 mt-4">
           <div id="portfolio" class="portfolio">
-             <div class="row">
+             {{-- <div class="row">
               <div class="col-lg-12 d-flex justify-content-center">
                 <ul id="portfolio-flters">
                   <li data-filter="*" class="filter-active">All</li>
@@ -68,30 +68,29 @@
                   @endforelse
                 </ul>
               </div>
-            </div>
+            </div> --}}
           <h3 class="resume-title">Professional Experience</h3>
-          <div class="portfolio-container">
+         
            @forelse ($experiences as $experience)
+           <div class="portfolio-container">
              <div class="portfolio-item fliter-{{$experience->service->title}}">
               <div class="resume-item">
-                <h4>{{$experience->title}}</h4> 
-                <h5>{{\Carbon\Carbon::parse($experience->start_date )->format('M d, Y')}} - {{  $experience->present == true ? 'Present' : \Carbon\Carbon::parse($experience->end_date )->format('M d, Y')  }} </h5>
-                <p><em>{{$experience->location}} </em></p>
-                <p><em>{{$experience->organization}} </em></p>
-                <p>
-                <ul>
-                  {{-- @foreach (json_decode($experience->description) as $content)
-                    <li>{{$content}}</li>
-                  @endforeach --}}   
-                </ul>
-                </p>
+                  <h4>{{$experience->title}}</h4> 
+                  <p><em>{{$experience->organization}} </em></p>
+                  <p><em>{{$experience->location}} </em></p>
+                  <h5>{{\Carbon\Carbon::parse($experience->start_date )->format('M d, Y')}} - {{  $experience->present == true ? 'Present' : \Carbon\Carbon::parse($experience->end_date )->format('M d, Y')  }} </h5>
+                  <p>
+                    <ul>
+                      <li>{{ $experience->description }}</li>
+                    </ul>
+                  </p>
                 </div>
               </div>
+            </div>
             @empty
              No Data Found! 
             @endforelse
-          </div> 
-         </div>
+          </div>
       </div>
         {{-- Experiences Ends --}}
       </div>
@@ -120,6 +119,9 @@
       --bs-btn-disabled-bg: <?php echo $setting->secondary_color ?> !important;
       --bs-btn-disabled-border-color: <?php echo $setting->secondary_color ?> !important;
      }
+     .text-url a{
+          color: <?php echo $setting->primary_color ?> !important;
+        }
    </style>
  @endif
 @endsection

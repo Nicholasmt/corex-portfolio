@@ -14,7 +14,7 @@
           <ul id="portfolio-flters">
             <li data-filter="*" class="filter-active">All</li>
             @forelse ($services as $service)
-              <li data-filter=".fliter-{{$service->title}}">{{$service->title}}</li>
+              <li data-filter=".fliter-{{$service->id}}">{{$service->title}}</li>
              @empty
              <li>No Data Found</li>
             @endforelse
@@ -23,24 +23,36 @@
       </div>
 
       <div class="row portfolio-container">
-        @forelse ($projects as $work)
-         <div class="col-lg-4 col-md-6 portfolio-item fliter-{{$work->service->title}}">
+        @forelse ($projects as $project)
+         <div class="col-lg-4 col-md-6 portfolio-item fliter-{{$project->service_id}}">
           <div class="portfolio-wrap">
-            @if(!empty($work->photo))
-            @foreach (json_decode($work->photo) as $photo)
-             <img src="{{ asset($photo)}}" class="img-fluid" alt="">
-             <div class="portfolio-info">
-              <h4>{{$work->service->title}}</h4>
-              {{-- <p>{{$work->service->title}}</p> --}}
+              <x-curator-glider
+                class="img-fluid"
+                :media="$project->image_id"
+                alt="project image"
+                {{-- width="403" 
+                height="403" --}}
+              />
+             <div class="portfolio-info"> 
+              <h4>{{$project->name}}</h4>
+              <p>{{$project->description}}</p>
               <div class="portfolio-links">
-                <a href="{{ asset($photo)}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{$work->service->title}}"><i class="bi bi-eye"></i></a>
-                <a href="{{ route('detail',$work->id)}}" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                @forelse($project->portfolios as $key => $portfolio)
+                   @php
+                    $media = App\Models\Media::where('id',$portfolio->img)->first();
+                  @endphp
+                  @if($key == 0)
+                    <a href="{{ asset('storage/'.$media->path)}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Project Preview"><i class="bi bi-eye"></i></a>
+                  @else
+                    <a href="{{ asset('storage/'.$media->path)}}" data-gallery="portfolioGallery" class="portfolio-lightbox"></a>
+                  @endif
+                @empty
+                  <p class="text-center">No project portfolio found!</p>
+                @endforelse
+                <a href="{{ route('view-project',$project->id)}}" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Project information"><i class="bx bx-link"></i></a>
               </div>
             </div>
-            @break
-            @endforeach
-            @endif
-          </div>
+         </div>
         </div>
         @empty
           <p class="badge badge-info">No Data Found</p>  

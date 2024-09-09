@@ -24,7 +24,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         CreateGeneralSetting::disableCreateAnother();
-        CreateContact::disableCreateAnother();
         View::composer('*', function ($view) {
             $setting = GeneralSetting::first();
             $view->with(['setting'=>$setting]);

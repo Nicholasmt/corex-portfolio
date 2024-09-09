@@ -8,6 +8,7 @@ use App\Models\Social;
 use App\Models\Contact;
 use App\Models\Project;
 use App\Models\Service;
+use App\Models\Interest;
 use App\Models\Education;
 use App\Models\Experience;
 use Illuminate\Http\Request;
@@ -25,8 +26,9 @@ class HomeController extends Controller
         $contact = Contact::first();
         $qualifications = Education::get();
         $socials = Social::where('active',1)->get();
+        $interests = Interest::get();
         $skills = Skill::where('active',1)->get();
-        return view('front.about',compact('socials','contact','skills','qualifications'));
+        return view('front.about',compact('socials','contact','skills','qualifications','interests'));
 
     }
 
@@ -49,7 +51,7 @@ class HomeController extends Controller
     public function projects()
     {
         $services = Service::get();
-        $projects = Project::get();
+        $projects = Project::with('portfolios')->get();
         return view('front.projects',compact('projects','services'));
     }
 
@@ -64,6 +66,12 @@ class HomeController extends Controller
         $contact = Contact::first();
         $socials = Social::where('active',1)->get();
         return view('front.hire-me',compact('contact','socials'));
+    }
+
+    public function view_project($id)
+    {
+        $view_project = Project::where('id',$id)->with('portfolios')->first();
+        return view('front.project-view',compact('view_project'));
     }
 
 }

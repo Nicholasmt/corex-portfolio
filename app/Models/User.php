@@ -3,11 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Media;
+use App\Models\GeneralSetting;
+use Filament\Models\Contracts\HasAvatar;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasAvatar
 {
     use HasFactory, Notifiable;
 
@@ -34,6 +37,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+
     /**
      * Get the attributes that should be cast.
      *
@@ -45,5 +49,25 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        $setting = GeneralSetting::first();
+        if(!empty($setting))
+        {
+            $avatar = Media::where('id',$setting->passport)->first();
+            if($avatar->path == null)
+            {
+                return null;
+            }
+            else
+            {
+               return  'storage/'.$avatar->path;
+            }
+
+        }else{
+            return null;
+        }
     }
 }

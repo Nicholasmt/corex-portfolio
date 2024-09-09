@@ -12,6 +12,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+use Awcodes\Curator\Components\Forms\CuratorPicker;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\RelationManagers\RelationManager;
 
@@ -27,6 +28,7 @@ class ProjectsRelationManager extends RelationManager
                             ->required()
                             ->maxLength(255),
                     Textarea::make('description')->required(),
+                    CuratorPicker::make('image_id'),
                     TextInput::make('url')
                               ->required()
                               ->visible(function(Get $get){
