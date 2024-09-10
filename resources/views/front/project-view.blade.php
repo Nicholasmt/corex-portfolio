@@ -34,7 +34,7 @@
           <ul>
             <li><strong>Services</strong>: {{$view_project->service->title}}</li>
             {{-- <li><strong>Project date</strong>: {{$view_project->created_at}}</li> --}}
-            <li><strong>Project URL</strong>: <a href="{{$view_project->url}}">visit site</a></li>
+            <li class="text-url"><strong>Project URL</strong>: <a href="{{$view_project->url}}">visit site</a></li>
           </ul>
           <p>
             {{$view_project->description}}
@@ -45,4 +45,14 @@
 
     </div>
   </div><!-- End Portfolio Details -->
+  @if(!empty($setting))
+        <style>
+         .text-url a{
+            color: <?php echo $setting->primary_color ?> !important;
+        }
+        .portfolio-details .swiper-pagination .swiper-pagination-bullet-active{
+            background: <?php echo $setting->primary_color ?> !important;
+        }
+      </style>
+    @endif
  @endsection

@@ -60,4 +60,12 @@
       </div>
     </div>
   </section><!-- End Portfolio Section -->
+  @if(!empty($setting))
+        <style>
+         .portfolio-lightbox, .portfolio-details-lightbox{
+            color: <?php echo $setting->primary_color ?> !important;
+        }
+        
+      </style>
+    @endif
  @endsection
