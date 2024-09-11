@@ -8,12 +8,14 @@ use App\Models\Media;
 use Filament\Widgets;
 use Filament\PanelProvider;
 use App\Models\GeneralSetting;
+use Filament\Navigation\MenuItem;
 use Awcodes\Curator\CuratorPlugin;
 use Filament\Support\Colors\Color;
 use App\Filament\Widgets\VisitSite;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
@@ -32,7 +34,7 @@ class AdminPanelProvider extends PanelProvider
             $media = Media::where('id',$color_setting->favicon)->first();
              $favicon = 'storage/'.$media->path;
         }else{
-            $favicon = 'assets/imgs/sample-favicon.png';
+            $favicon = 'assets/imgs/favicon.png';
         }
        
         return $panel
@@ -49,6 +51,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Pages\Dashboard::class,
+                
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
@@ -84,7 +87,12 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->brandLogo(fn () => view('filament.logo'))
              ->brandLogoHeight('3rem')
-             ->profile()
+            ->userMenuItems([
+                MenuItem::make()
+                    ->label('Profile')
+                    ->url(fn (): string =>'profile')
+                    ->icon('heroicon-o-user'),
+              ])
              ->favicon(asset($favicon));
               
     }

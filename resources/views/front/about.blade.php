@@ -24,7 +24,7 @@
               height="403"
             /> 
           @else
-             <img src="{{ asset('assets/imgs/me.png') }}" class="img-fluid" height="403" width="403" alt="sample picture">
+             <img src="{{ asset('assets/imgs/sample.png') }}" class="img-fluid" height="403" width="403" alt="sample picture">
           @endif
         </div>
         <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
