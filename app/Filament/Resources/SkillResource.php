@@ -21,7 +21,7 @@ class SkillResource extends Resource
 {
     protected static ?string $model = Skill::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-light-bulb';
     protected static ?string $navigationGroup = 'Portfolio Configurtaions';
     protected static ?int $navigationSort = 2;
 

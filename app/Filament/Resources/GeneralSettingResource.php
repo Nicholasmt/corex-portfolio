@@ -23,7 +23,7 @@ class GeneralSettingResource extends Resource
 {
     protected static ?string $model = GeneralSetting::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-cog';
+    protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
     protected static ?string $navigationGroup = 'Site Configurations';
     protected static ?int $navigationSort = 1;
    

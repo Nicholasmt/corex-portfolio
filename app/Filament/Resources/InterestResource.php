@@ -20,7 +20,7 @@ class InterestResource extends Resource
 {
     protected static ?string $model = Interest::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-hand-thumb-up';
     protected static ?string $navigationGroup = 'Portfolio Configurtaions';
     protected static ?int $navigationSort = 5;
 

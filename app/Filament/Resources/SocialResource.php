@@ -21,7 +21,7 @@ class SocialResource extends Resource
 {
     protected static ?string $model = Social::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
     protected static ?string $navigationGroup = 'Contact Configurations';
     protected static ?int $navigationSort = 2;
 
