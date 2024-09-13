@@ -8,6 +8,7 @@ use App\Models\Media;
 use Filament\Widgets;
 use Filament\PanelProvider;
 use App\Models\GeneralSetting;
+use App\Filament\Pages\Profile;
 use Filament\Navigation\MenuItem;
 use Awcodes\Curator\CuratorPlugin;
 use Filament\Support\Colors\Color;
@@ -15,7 +16,7 @@ use App\Filament\Widgets\VisitSite;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use Symfony\Component\HttpKernel\Profiler\Profile;
+use TomatoPHP\FilamentBrowser\FilamentBrowserPlugin;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
@@ -87,13 +88,36 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->brandLogo(fn () => view('filament.logo'))
              ->brandLogoHeight('3rem')
+             ->favicon(asset($favicon))
             ->userMenuItems([
                 MenuItem::make()
                     ->label('Profile')
-                    ->url(fn (): string =>'profile')
+                    ->url(fn (): string => Profile::getUrl())
                     ->icon('heroicon-o-user'),
               ])
-             ->favicon(asset($favicon));
+              ->plugin(
+                 FilamentBrowserPlugin::make()
+                    ->hiddenFolders([
+                        base_path('app')
+                    ])
+                    ->hiddenFiles([
+                        base_path('.env')
+                    ])
+                    ->hiddenExtantions([
+                        "php"
+                    ])
+                    ->allowCreateFolder()
+                    ->allowEditFile()
+                    ->allowCreateNewFile()
+                    ->allowCreateFolder()
+                    ->allowRenameFile()
+                    ->allowDeleteFile()
+                    ->allowMarkdown()
+                    ->allowCode()
+                    ->allowPreview()
+                    ->basePath(base_path())
+                    );
+            
               
     }
 }
