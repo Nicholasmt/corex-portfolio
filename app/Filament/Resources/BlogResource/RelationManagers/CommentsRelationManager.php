@@ -3,12 +3,14 @@
 namespace App\Filament\Resources\BlogResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\RichEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Resources\RelationManagers\RelationManager;
 
 class CommentsRelationManager extends RelationManager
 {
@@ -21,6 +23,7 @@ class CommentsRelationManager extends RelationManager
                 Forms\Components\TextInput::make('full_name')
                     ->required()
                     ->maxLength(255),
+                    RichEditor::make('content')->disabled()
             ]);
     }
 
@@ -29,7 +32,8 @@ class CommentsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('full_name')
             ->columns([
-                Tables\Columns\TextColumn::make('full_name'),
+                TextColumn::make('full_name')->searchable()->sortable(),
+                
             ])
             ->filters([
                 //
@@ -39,7 +43,7 @@ class CommentsRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

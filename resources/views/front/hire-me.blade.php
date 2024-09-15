@@ -62,8 +62,8 @@
       </div>
 
       @livewireStyles
-
-      <livewire:contact-me/>
+        <livewire:contact-me/>
+      @livewireScripts
 
       </div>
   </section>

@@ -1,8 +1,8 @@
 <div>
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
     <div>
-        @if(Session::has('message'))
-          <div class="alert alert-success mt-3">
+        @if(session()->has('message'))
+          <div class="alert alert-success mt-4">
               <span class="text-capitalize font-bold">{{session()->get('message')}}</span>
          </div>
        @endif
@@ -30,9 +30,10 @@
             <div class="error-message"></div>
             <div class="sent-message">Your message has been sent. Thank you!</div>
           </div> --}}
-          <div class="text-center mt-4">
-              <button wire:click="store_message" class="btn btn-primary">Send Message</button>
+          <div class="text-center mt-4" wire:loading.remove>
+            <button wire:click="submit" class="btn btn-primary">Submit</button>
           </div>
+          <p class="alert text-center mt-4" wire:loading>Loading please wait...</p>
         </div>
     
         
