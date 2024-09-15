@@ -80,7 +80,8 @@ class AdminPanelProvider extends PanelProvider
                     ->navigationCountBadge()
                     ->registerNavigation(false)
                     ->defaultListView('grid')
-                    ->resource(\Awcodes\Curator\Resources\MediaResource::class)
+                    ->resource(\Awcodes\Curator\Resources\MediaResource::class),
+                  
             ])
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->authMiddleware([
@@ -94,30 +95,8 @@ class AdminPanelProvider extends PanelProvider
                     ->label('Profile')
                     ->url(fn (): string => Profile::getUrl())
                     ->icon('heroicon-o-user'),
-              ])
-              ->plugin(
-                 FilamentBrowserPlugin::make()
-                    ->hiddenFolders([
-                        base_path('app')
-                    ])
-                    ->hiddenFiles([
-                        base_path('.env')
-                    ])
-                    ->hiddenExtantions([
-                        "php"
-                    ])
-                    ->allowCreateFolder()
-                    ->allowEditFile()
-                    ->allowCreateNewFile()
-                    ->allowCreateFolder()
-                    ->allowRenameFile()
-                    ->allowDeleteFile()
-                    ->allowMarkdown()
-                    ->allowCode()
-                    ->allowPreview()
-                    ->basePath(base_path())
-                    );
-            
+            ]);
+                   
               
     }
 }

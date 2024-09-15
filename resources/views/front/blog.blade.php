@@ -16,7 +16,7 @@
         <div class="col-md-6 d-flex align-items-stretch">
           <div class="info-box">
             <div class="text-center">
-              <a href="#">
+              <a href="{{ route('blog-view',$blog) }}">
                 <x-curator-glider
                   class="img-fluid"
                   :media="$blog->image"

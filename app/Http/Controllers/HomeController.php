@@ -61,6 +61,12 @@ class HomeController extends Controller
         return view('front.blog',compact('blogs'));
     }
 
+    public function blog_view($id)
+    {
+         $view = Blog::where('id',$id)->first();
+         return view('front.blog-view',compact('view'));
+    }
+
     public function contact_me()
     {
         $contact = Contact::first();
