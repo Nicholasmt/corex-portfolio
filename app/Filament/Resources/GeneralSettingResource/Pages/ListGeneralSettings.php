@@ -21,6 +21,7 @@ class ListGeneralSettings extends ListRecords
         }else{
             return [
                 Actions\CreateAction::make(),
+                // ->createAnother(false),
             ];
           
         }

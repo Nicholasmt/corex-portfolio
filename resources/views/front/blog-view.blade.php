@@ -31,6 +31,23 @@
        <livewire:blog-comments :view="$view"/>
        @livewireScripts
     </div>
+    <div class="container">
+       <div class="mt-4">
+          <h3 class="">Comments ({{ $view->comments->count() }})</h3>
+          @forelse ($view->comments as $comment)
+            <div class="row mt-5">
+              <div class="col-md-3">
+                <i class="fw-bold">{{ $comment->full_name }} </i>:
+              </div>
+              <div class="col-md-9">
+                <span class=""> {{ $comment->content }}</span>
+              </div>
+            </div>
+          @empty
+              <p class="">No Comments!</p>
+          @endforelse
+       </div>
+    </div>
   </div>
   </section>
   <!-- End Contact Section -->

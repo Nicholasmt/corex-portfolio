@@ -63,7 +63,7 @@ class HomeController extends Controller
 
     public function blog_view($id)
     {
-         $view = Blog::where('id',$id)->first();
+         $view = Blog::where('id',$id)->with('comments')->first();
          return view('front.blog-view',compact('view'));
     }
 

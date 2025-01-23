@@ -13,6 +13,7 @@ use Filament\Navigation\MenuItem;
 use Awcodes\Curator\CuratorPlugin;
 use Filament\Support\Colors\Color;
 use App\Filament\Widgets\VisitSite;
+use Illuminate\Support\Facades\Schema;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -30,7 +31,11 @@ class AdminPanelProvider extends PanelProvider
      
     public function panel(Panel $panel): Panel
     {
-        $color_setting = GeneralSetting::first();
+        $color_setting = [];
+        if(Schema::hasTable('general_settings'))
+        {
+           $color_setting = GeneralSetting::first();
+        };
         if(!empty($color_setting)){
             $media = Media::where('id',$color_setting->favicon)->first();
              $favicon = 'storage/'.$media->path;

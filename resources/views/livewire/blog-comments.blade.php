@@ -12,7 +12,7 @@
           @error('name') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
         </div>
         <div class="form-group mt-3">
-          <textarea class="form-control" wire:model.live="message" rows="5" placeholder="Message"></textarea>
+          <textarea class="form-control" wire:model.live="message" rows="5" placeholder="Comment here..."></textarea>
           @error('message') <span class="text-danger font_13 text-capitalize">{{$message}}</span> @enderror
         </div>
         <div class="text-center mt-4" wire:loading.remove>
